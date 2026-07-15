@@ -16,9 +16,6 @@ body{
 }
 
 
-/*=========================
- HERO SECTION
-=========================*/
 
 .hero-section{
     position:relative;
@@ -133,10 +130,6 @@ body{
 }
 
 
-/*=========================
- RIGHT
-=========================*/
-
 .hero-right{
 
     width:58%;
@@ -204,211 +197,6 @@ body{
 
 
 
-
-@media(max-width:1200px){
-
-.hero-left h1{
-
-font-size:50px;
-
-}
-
-.hero-big-circle{
-
-width:520px;
-height:520px;
-
-}
-
-.hero-img{
-
-width:420px;
-
-}
-
-}
-
-@media(max-width:992px){
-
-.hero-container{
-
-flex-direction:column;
-text-align:center;
-
-padding:80px 0;
-
-}
-
-.hero-left{
-
-width:100%;
-padding-left:0;
-margin-bottom:60px;
-
-}
-
-.hero-left p{
-
-margin:auto;
-
-}
-
-.hero-stats{
-
-justify-content:center;
-
-}
-
-.hero-right{
-
-width:100%;
-
-}
-
-.hero-big-circle{
-
-width:470px;
-height:470px;
-
-}
-
-.hero-img{
-
-width:370px;
-
-}
-
-}
-
-@media(max-width:576px){
-
-.hero-left h1{
-
-font-size:40px;
-
-}
-
-.hero-tag{
-
-font-size:17px;
-
-}
-
-.hero-left p{
-
-font-size:17px;
-
-}
-
-.hero-big-circle{
-
-width:340px;
-height:340px;
-
-}
-
-.hero-img{
-
-width:270px;
-
-}
-
-.hero-stats{
-
-flex-wrap:wrap;
-gap:25px;
-justify-content:center;
-
-}
-
-.stat-box h2{
-
-font-size:36px;
-
-}
-
-}
-
-
-
-
-@media (max-width: 992px) {
-
-  .hero-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 50px;
-  }
-
-  .hero-left,
-  .hero-right {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .hero-left h1 {
-    font-size: 45px;
-  }
-
-  .hero-left p {
-    font-size: 18px;
-    margin: auto;
-  }
-
-  .hero-stats {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .hero-big-circle {
-    width: 400px;
-    height: 400px;
-  }
-
-  .hero-img {
-    width: 320px;
-  }
-}
-
-
-@media (max-width: 576px) {
-
-  .hero-section {
-    padding: 80px 0;
-  }
-
-  .hero-tag {
-    font-size: 18px;
-  }
-
-  .hero-left h1 {
-    font-size: 34px;
-  }
-
-  .hero-left p {
-    font-size: 16px;
-  }
-
-  .hero-big-circle {
-    width: 300px;
-    height: 300px;
-  }
-
-  .hero-img {
-    width: 240px;
-  }
-
-  .stat-box h2 {
-    font-size: 30px;
-  }
-
-  .stat-box span {
-    font-size: 15px;
-  }
-
-}
-
-
 .slider-section {
     width: 100%;
     height: 600px;
@@ -463,21 +251,6 @@ font-size:36px;
     animation-play-state: paused;
 }
 
-/* Responsive */
-
-@media(max-width:768px){
-
-.slider-section{
-    height:350px;
-}
-
-.slides img{
-    height:350px;
-}
-
-}
-
-
 /* School Banner */
 
 .school-banner{
@@ -513,47 +286,6 @@ font-size:36px;
     font-family:'Poppins', sans-serif;
     line-height:1.5;
 }
-
-/* Tablet */
-@media (max-width:991px){
-
-    .school-banner{
-        padding:22px 15px;
-    }
-
-    .school-banner h2{
-        font-size:32px;
-    }
-
-    .school-banner p{
-        font-size:18px;
-        margin-top:14px;
-    }
-}
-
-/* Mobile */
-@media (max-width:576px){
-
-    .school-banner{
-        padding:18px 12px;
-    }
-
-    .school-banner h2{
-        font-size:24px;
-        line-height:1.3;
-    }
-
-    .school-banner p{
-        font-size:15px;
-        margin-top:10px;
-        line-height:1.6;
-    }
-}
-
-
-/*==============================
- Vision Mission Goal
-===============================*/
 
 .vmg-section{
     padding:90px 20px;
@@ -629,26 +361,6 @@ font-size:36px;
     font-weight:400;
     line-height:1.9;
 }
-
-/* Responsive */
-
-@media(max-width:992px){
-
-.vmg-container{
-
-grid-template-columns:1fr;
-max-width:650px;
-
-}
-
-.vmg-card{
-
-padding:40px 28px;
-
-}
-
-}
-
 
 
 
@@ -730,9 +442,6 @@ padding:40px 28px;
 }
 
 
-/*==============================
-    LEADERSHIP
-==============================*/
 
 .leadership-section{
     padding:90px 0;
@@ -824,48 +533,6 @@ padding:40px 28px;
     line-height:1.6;
 }
 
-/* Tablet */
-
-@media(max-width:1200px){
-
-.leadership-container{
-    grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-.leadership-container{
-    grid-template-columns:1fr;
-}
-
-.leadership-heading span{
-    font-size:28px;
-    padding:12px 22px;
-}
-
-.leader-image img{
-    height:380px;
-}
-
-.leader-info{
-    text-align:center;
-}
-
-.leader-info h3{
-    font-size:24px;
-}
-
-}
-
-
-/*=========================
- WHY CHOOSE
-=========================*/
-
 .why-section{
     padding:90px 0;
     background:#fff;
@@ -896,7 +563,6 @@ padding:40px 28px;
     box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-/* Content */
 
 .why-content{
     flex:0 0 58%;
@@ -924,49 +590,371 @@ padding:40px 28px;
     margin-bottom:28px;
 }
 
-/* Responsive */
 
-@media(max-width:992px){
 
-.why-container{
-    flex-direction:column;
-    gap:45px;
+
+/* Tablet & small laptop */
+@media (max-width: 1024px){
+
+    html{
+    scroll-behavior:smooth;
 }
 
-.why-image,
-.why-content{
-    flex:100%;
+body{
     width:100%;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#fff;
+}
+ 
+    .hero-section{
+        height:auto;
+        padding:60px 0;
+    }
+ 
+    .hero-container{
+        flex-direction:column;
+        gap:40px;
+    }
+ 
+    .hero-left{
+        width:100%;
+        padding-left:0;
+        top:0;
+        text-align:center;
+    }
+ 
+    .hero-left h1{
+        font-size:46px;
+    }
+ 
+    .hero-left p{
+        max-width:100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+ 
+    .hero-stats{
+        justify-content:center;
+    }
+ 
+    .hero-right{
+        width:100%;
+    }
+ 
+    .hero-big-circle{
+        width:480px;
+        height:480px;
+    }
+ 
+    .hero-img{
+        width:380px;
+    }
+ 
+    .slider-section{
+        height:450px;
+        top:0;
+        margin-top:40px;
+    }
+ 
+    .slides img{
+        height:450px;
+    }
+ 
+    .vmg-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+ 
+    .leadership-container{
+        grid-template-columns:repeat(3,1fr);
+    }
+ 
+    .why-container{
+        flex-direction:column;
+    }
+ 
+    .why-image,
+    .why-content{
+        flex:0 0 100%;
+    }
+ 
+    .why-content h2,
+    .school-banner h2,
+    .section-title h2{
+        font-size:38px;
+    }
+}
+ 
+/* Tablet portrait */
+@media (max-width: 768px){
+ 
+
+    html{
+    scroll-behavior:smooth;
 }
 
-.why-content h2{
-    font-size:42px;
+body{
+    width:100%;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#fff;
+}
+    .hero-left h1{
+        font-size:36px;
+    }
+ 
+    .hero-left p{
+        font-size:16px;
+    }
+ 
+    .hero-tag{
+        font-size:17px;
+    }
+ 
+    .hero-btn{
+        padding:13px 30px;
+        font-size:16px;
+    }
+ 
+    .hero-stats{
+        gap:30px;
+        flex-wrap:wrap;
+    }
+ 
+    .stat-box h2{
+        font-size:38px;
+    }
+ 
+    .stat-box span{
+        font-size:15px;
+    }
+ 
+    .hero-big-circle{
+        width:340px;
+        height:340px;
+    }
+ 
+    .hero-img{
+        width:270px;
+    }
+ 
+    .slider-section{
+        height:320px;
+    }
+ 
+    .slides img{
+        height:320px;
+    }
+ 
+    .school-banner h2{
+        font-size:28px;
+    }
+ 
+    .school-banner p{
+        font-size:16px;
+    }
+ 
+    .vmg-section{
+        padding:60px 15px;
+    }
+ 
+    .vmg-container{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+ 
+    .vmg-card{
+        padding:32px 22px;
+    }
+ 
+    .vmg-card h3{
+        font-size:26px;
+    }
+ 
+    .vmg-card p{
+        font-size:17px;
+    }
+ 
+    .section-title h2{
+        font-size:30px;
+    }
+ 
+    .section-title p{
+        font-size:16px;
+    }
+ 
+    .departmentSwiper{
+        width:85%;
+    }
+ 
+    .leadership-heading span{
+        font-size:28px;
+        padding:10px 22px;
+    }
+ 
+    .leadership-container{
+        grid-template-columns:repeat(2,1fr);
+        gap:24px;
+    }
+ 
+    .leader-image img{
+        height:300px;
+    }
+ 
+    .leader-info h3{
+        font-size:21px;
+    }
+ 
+    .leader-info h4{
+        font-size:16px;
+    }
+ 
+    .why-content h2{
+        font-size:30px;
+    }
+ 
+    .why-content p{
+        font-size:17px;
+    }
+}
+ 
+/* Mobile phones */
+@media (max-width: 480px){
+    html{
+    scroll-behavior:smooth;
 }
 
-.why-content{
-    text-align:center;
+body{
+    width:100%;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#fff;
 }
-
-.title-line{
-    margin:0 auto 30px;
+ 
+    .hero-container{
+        width:92%;
+    }
+ 
+    .hero-left h1{
+        font-size:28px;
+    }
+ 
+    .hero-left p{
+        font-size:15px;
+        line-height:1.6;
+    }
+ 
+    .hero-btn{
+        padding:12px 26px;
+        font-size:15px;
+    }
+ 
+    .hero-stats{
+        gap:20px;
+        justify-content:space-between;
+        width:100%;
+    }
+ 
+    .stat-box h2{
+        font-size:28px;
+    }
+ 
+    .stat-box span{
+        font-size:13px;
+    }
+ 
+    .hero-big-circle{
+        width:250px;
+        height:250px;
+    }
+ 
+    .hero-img{
+        width:200px;
+    }
+ 
+    .slider-section{
+        height:220px;
+    }
+ 
+    .slides img{
+        height:220px;
+    }
+ 
+    .school-banner{
+        padding:20px 12px;
+    }
+ 
+    .school-banner h2{
+        font-size:22px;
+    }
+ 
+    .school-banner p{
+        font-size:14px;
+        margin-top:12px;
+    }
+ 
+    .vmg-card h3{
+        font-size:22px;
+    }
+ 
+    .vmg-card p{
+        font-size:15px;
+        line-height:1.7;
+    }
+ 
+    .section-title h2{
+        font-size:24px;
+    }
+ 
+    .section-title p{
+        font-size:14px;
+    }
+ 
+    .departmentSwiper{
+        width:88%;
+    }
+ 
+    .swiper-slide img{
+        height:180px;
+    }
+ 
+    .swiper-button-next,
+    .swiper-button-prev{
+        width:40px;
+        height:40px;
+    }
+ 
+    .swiper-button-next:after,
+    .swiper-button-prev:after{
+        font-size:15px;
+    }
+ 
+    .leadership-heading span{
+        font-size:20px;
+        padding:8px 16px;
+    }
+ 
+    .leadership-container{
+        grid-template-columns:1fr;
+        gap:30px;
+        width:85%;
+    }
+ 
+    .leader-image img{
+        height:340px;
+    }
+ 
+    .why-content h2{
+        font-size:24px;
+    }
+ 
+    .why-content p{
+        font-size:15px;
+        line-height:1.7;
+    }
+ 
+    .why-image img{
+        border-radius:8px;
+    }
 }
-
-}
-
-@media(max-width:576px){
-
-.why-section{
-    padding:60px 0;
-}
-
-.why-content h2{
-    font-size:34px;
-}
-
-.why-content p{
-    font-size:17px;
-    line-height:1.8;
-}
-
-}
-
+ 
