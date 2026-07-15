@@ -2,7 +2,7 @@ import React from 'react'
 
 function Hospital() {
   return (
-    <div>Hospital</div>
+    <div style={{ fontSize: "60px" }}>Hospital</div>
   )
 }
 
