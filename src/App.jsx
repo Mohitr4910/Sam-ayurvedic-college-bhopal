@@ -6,8 +6,8 @@ import Courses from "./Pages/Courses";
 import Department from "./Pages/Department";
 import Hospital from "./Pages/Hospital";
 import { Routes, Route } from 'react-router-dom'
-import Header from './components/Header';
-import Footer from './Components/Footer';
+import Header from "./components/Header";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
