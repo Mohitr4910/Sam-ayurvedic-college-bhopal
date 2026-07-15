@@ -298,10 +298,29 @@ body {
 
 @media (max-width:480px){
 
+  .menu-btn{
+  position: relative;
+   bottom:100px;
+   left: 180px;
+    display:block;
+    z-index:1001;
+}
+
+.navbar{
+    position:relative;
+    top:-100px;
+    left:135px;
+    width:100%;
+       background: rgba(255, 255, 255, 0.8);
+    border-radius:0;
+    padding:20px 0;
+    display:none;
+}
+
   .logo img{
-    height:65px;
+    height:95px;
     position: relative;
-    left:-180px
+    left:-155px
   }
 
   .left span{
