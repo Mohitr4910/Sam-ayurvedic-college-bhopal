@@ -235,10 +235,15 @@ body{
 .hero-big-circle{
     width:500px;
     height:500px;
+    position:relative;
+    right:250px;
 }
 
 .hero-img{
     width:390px;
+    position:relative;
+    top:35px;
+    left:450px;
 }
 
 }
