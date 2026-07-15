@@ -238,7 +238,7 @@ function Home() {
 
     <div className="section-divider"></div>
 
-<AnimatedContent direction="vertical"  distance={400} duration={3} ease="power4.out">
+<AnimatedContent direction="vertical"  distance={300} duration={2} ease="power4.out">
         <section className="leadership-section">
 
       <div className="leadership-heading">
