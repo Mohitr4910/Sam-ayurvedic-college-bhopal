@@ -13,7 +13,12 @@ import AnimatedContent from './AnimatedContent';
 import { NavLink } from "react-router-dom";
 
 
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+
 function Topbar() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <>
             {/* Blue Header */}
@@ -52,76 +57,59 @@ function Topbar() {
             <Announcrment />
             {/* White Header */}
 
-            <div className="middle-header">
+<div className="middle-header">
+  <div className="container">
 
-                <div className="container">
-                    <AnimatedContent direction="horizontal" reverse distance={400} duration={2} ease="power4.out">
+    <AnimatedContent
+      direction="horizontal"
+      reverse
+      distance={400}
+      duration={2}
+      ease="power4.out"
+    >
+      <div className="logo">
+        <img src={logo} alt="Logo" />
+      </div>
+    </AnimatedContent>
 
-                        <div className="logo">
-                            <img src={logo} alt="" />
+    {/* Hamburger Button */}
+    <div
+      className="menu-btn"
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      {menuOpen ? <FaTimes /> : <FaBars />}
+    </div>
 
-                        </div>
-                    </AnimatedContent>
-                    <AnimatedContent direction="horizontal" distance={400} duration={2} ease="power4.out">
+    {/* Single Navbar */}
+    <AnimatedContent
+      direction="horizontal"
+      distance={400}
+      duration={2}
+      ease="power4.out"
+    >
+      <nav className={`navbar ${menuOpen ? "active" : ""}`}>
+        <ul>
+          <li><NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink></li>
+          <li><NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink></li>
+          <li><NavLink to="/academic" onClick={() => setMenuOpen(false)}>Academics</NavLink></li>
+          <li><NavLink to="/department" onClick={() => setMenuOpen(false)}>Department</NavLink></li>
+          <li><NavLink to="/courses" onClick={() => setMenuOpen(false)}>Courses</NavLink></li>
+          <li><NavLink to="/hospital" onClick={() => setMenuOpen(false)}>Hospital</NavLink></li>
+          <li><NavLink to="/facilities" onClick={() => setMenuOpen(false)}>Facilities</NavLink></li>
+          <li>
+            <NavLink
+              to="/mandatory-disclosure"
+              onClick={() => setMenuOpen(false)}
+            >
+              Mandatory Disclosure
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+    </AnimatedContent>
 
-
-                        <nav className="navbar">
-                            <div className="container">
-                                <ul>
-
-                                    <li>
-                                        <NavLink to="/">Home</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/about">About</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/academic">Academics</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/department">Department</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/courses">Courses</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/hospital">Hospital</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/facilities">Facilities</NavLink>
-                                    </li>
-
-                                    <li>
-                                        <NavLink to="/mandatory-disclosure">
-                                            Mandatory Disclosure
-                                        </NavLink>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </nav>
-                    </AnimatedContent>
-
-                    {/* <div className="search-box">
-
-            <FaSearch />
-
-            <input
-              type="text"
-              placeholder="Search..."
-            />
-
-          </div> */}
-
-                </div>
-
-            </div>
+  </div>
+</div>
         </>
 
     )
