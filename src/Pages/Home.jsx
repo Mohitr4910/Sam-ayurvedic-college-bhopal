@@ -9,7 +9,7 @@ import hero1 from "../assets/1681282034phpqmnCNq-scaled-e1741112523268.jpeg";
 import hero2 from "../assets/sam-global-university-bhopal-366330.webp";
 import hero3 from "../assets/sam-global-university-bhopal-366333.webp";
 import hero4 from "../assets/sam-global-university-bhopal-366331.webp";
-import AnimatedContent from "../components/AnimatedContent";
+import AnimatedContent from "../Components/AnimatedContent";
 
 
 import img1 from "../assets/1606296487php6rXilZ-480x340.png";
