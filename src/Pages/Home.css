@@ -322,11 +322,13 @@ body{
     position:relative;
     top:0;
     overflow: hidden;
+    left:280px;
 }
 
 .hero-img{
     width:330px;
     top:35px;
+    
 }
 
 }
@@ -357,10 +359,14 @@ body{
 .hero-big-circle{
     width:350px;
     height:350px;
+    right:280px;
+    
 }
 
 .hero-img{
     width:250px;
+    position:relative;
+    left:410px;
 }
 
 .hero-stats{
