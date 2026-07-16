@@ -167,6 +167,9 @@ function Home() {
 
 
       <section class="vmg-section">
+      <div class="vmg-title">
+        <h2>Guiding Principles</h2>
+      </div>
 <AnimatedContent direction="vertical"  distance={200} duration={2} ease="power4.out">
     <div class="vmg-container">
          

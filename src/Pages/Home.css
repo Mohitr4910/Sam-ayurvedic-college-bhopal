@@ -537,11 +537,32 @@ body{
     line-height:1.5;
 }
 
-
 .vmg-section{
     padding:90px 20px;
     background-size:cover;
     background-position:center;
+}
+
+
+.vmg-title{
+    text-align: center;
+    margin-bottom: 100px;
+    background: #86d9e0;
+    
+}
+
+
+
+
+.vmg-title h2{
+    display: inline-block;
+    padding: 8px 25px;
+    font-size: 48px;
+    font-weight: 700;
+    color: #2f317f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
 }
 
 .vmg-container{
@@ -611,37 +632,49 @@ body{
     line-height:1.9;
 }
 
-
-
 /* ==========================
    TABLET
 ========================== */
 
 @media (max-width:992px){
 
-.vmg-section{
-    padding:70px 20px;
+    .vmg-title{
+        margin-bottom:50px;
+    }
+
+    .vmg-title h2{
+        font-size:36px;
+        padding:8px 28px;
+    }
+
+    .vmg-title span{
+        width:70px;
+    }
+
+    .vmg-section{
+        padding:70px 20px;
+    }
+
+    .vmg-container{
+        grid-template-columns:repeat(2,1fr);
+        gap:25px;
+    }
+
+    .vmg-card{
+        padding:35px 25px;
+    }
+
+    .vmg-card h3{
+        font-size:28px;
+    }
+
+    .vmg-card p{
+        font-size:17px;
+        line-height:1.8;
+    }
+
 }
 
-.vmg-container{
-    grid-template-columns:repeat(2,1fr);
-    gap:25px;
-}
-
-.vmg-card{
-    padding:35px 25px;
-}
-
-.vmg-card h3{
-    font-size:28px;
-}
-
-.vmg-card p{
-    font-size:17px;
-    line-height:1.8;
-}
-
-}
 
 /* ==========================
    MOBILE
@@ -649,36 +682,52 @@ body{
 
 @media (max-width:768px){
 
-.vmg-section{
-    padding:50px 15px;
-    background-position:center;
+    .vmg-title{
+        margin-bottom:40px;
+    }
+
+    .vmg-title h2{
+        font-size:30px;
+        padding:8px 22px;
+        letter-spacing:.5px;
+    }
+
+    .vmg-title span{
+        width:60px;
+        height:3px;
+    }
+
+    .vmg-section{
+        padding:50px 15px;
+        background-position:center;
+    }
+
+    .vmg-container{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .vmg-card{
+        padding:30px 22px;
+        border-radius:18px;
+    }
+
+    .vmg-card h3{
+        font-size:24px;
+        margin-bottom:15px;
+    }
+
+    .vmg-card p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .vmg-card:hover{
+        transform:translateY(-6px);
+    }
+
 }
 
-.vmg-container{
-    grid-template-columns:1fr;
-    gap:20px;
-}
-
-.vmg-card{
-    padding:30px 22px;
-    border-radius:18px;
-}
-
-.vmg-card h3{
-    font-size:24px;
-    margin-bottom:15px;
-}
-
-.vmg-card p{
-    font-size:15px;
-    line-height:1.7;
-}
-
-.vmg-card:hover{
-    transform:translateY(-6px);
-}
-
-}
 
 /* ==========================
    SMALL MOBILE
@@ -686,27 +735,43 @@ body{
 
 @media (max-width:480px){
 
-.vmg-section{
-    padding:40px 12px;
-}
+    .vmg-title{
+        margin-bottom:35px;
+    }
 
-.vmg-container{
-    gap:18px;
-}
+    .vmg-title h2{
+        font-size:24px;
+        padding:8px 16px;
+        border-radius:6px;
+        text-transform:none; /* agar normal case chahiye */
+    }
 
-.vmg-card{
-    padding:25px 18px;
-    border-radius:16px;
-}
+    .vmg-title span{
+        width:50px;
+        margin-top:15px;
+    }
 
-.vmg-card h3{
-    font-size:22px;
-}
+    .vmg-section{
+        padding:40px 12px;
+    }
 
-.vmg-card p{
-    font-size:14px;
-    line-height:1.6;
-}
+    .vmg-container{
+        gap:18px;
+    }
+
+    .vmg-card{
+        padding:25px 18px;
+        border-radius:16px;
+    }
+
+    .vmg-card h3{
+        font-size:22px;
+    }
+
+    .vmg-card p{
+        font-size:14px;
+        line-height:1.6;
+    }
 
 }
 
