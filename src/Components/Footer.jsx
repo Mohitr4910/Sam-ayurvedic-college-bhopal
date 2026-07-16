@@ -1,13 +1,10 @@
 import React from 'react'
 import "./Footer.css";
-import footerBg from "../assets/1681282034phpqmnCNq-scaled-e1741112523268.jpeg";
-
 function Footer() {
   return (
     <>
      <footer
       className="footer"
-      style={{ backgroundImage: `url(${footerBg})` }}
     >
       <div className="footer-overlay">
 

@@ -6,11 +6,10 @@ import "./Home.css";
 import crcl from "../assets/banner_img_bg.png";
 import doctor from "../assets/hero-image.png";
 
-import hero1 from "../assets/1681282034phpqmnCNq-scaled-e1741112523268.jpeg";
-import hero2 from "../assets/Slider2.webp";
-import hero3 from "../assets/Slider3.webp";
-import hero4 from "../assets/Slider4.jpg";
-import hero5 from "../assets/Slider5.webp";
+import hero1 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
+import hero2 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";
+import hero3 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM.jpeg";
+import hero4 from "../assets/WhatsApp Image 2026-07-16 at 12.54.22 PM.jpeg";
 
 import AnimatedContent from "../Components/AnimatedContent";
 
@@ -108,8 +107,7 @@ function Home() {
           <img src={hero1} alt="Hero 1" />
           <img src={hero2} alt="Hero 2" />
           <img src={hero3} alt="Hero 3" />
-          <img className="hero5" src={hero4} alt="Hero 4" />
-          <img src={hero5} alt="Hero 5" />
+          <img src={hero4} alt="Hero 4" />
         </div>
       </section>
 
