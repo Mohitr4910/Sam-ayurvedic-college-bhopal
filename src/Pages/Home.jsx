@@ -7,10 +7,10 @@ import crcl from "../assets/banner_img_bg.png";
 import doctor from "../assets/hero-image.png";
 
 import hero1 from "../assets/1681282034phpqmnCNq-scaled-e1741112523268.jpeg";
-import hero2 from "../assets/Slider2.png";
-import hero3 from "../assets/Slider3.png";
-import hero4 from "../assets/Slider4.png";
-import hero5 from "../assets/Slider5.png";
+import hero2 from "../assets/Slider2.webp";
+import hero3 from "../assets/Slider3.webp";
+import hero4 from "../assets/Slider4.jpg";
+import hero5 from "../assets/Slider5.webp";
 
 import AnimatedContent from "../Components/AnimatedContent";
 
