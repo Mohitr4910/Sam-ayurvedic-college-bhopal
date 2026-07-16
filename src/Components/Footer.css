@@ -11,7 +11,7 @@
 
     background:rgba(0,0,0,.78);
 
-    padding:70px 0 30px;
+    padding:40px 0 15px;
 }
 
 .footer-container{
@@ -24,11 +24,11 @@
     display:grid;
     grid-template-columns:repeat(4,1fr);
 
-    gap:60px;
+    gap:30px;
 
     border-bottom:1px solid rgba(255,255,255,.35);
 
-    padding-bottom:40px;
+    padding-bottom:20px;
 }
 
 .footer-column h3{
@@ -48,7 +48,7 @@
 
     font-size:24px;
 
-    margin:25px 0 15px;
+    margin:15px 0 11px;
 }
 
 .footer-column a{
@@ -79,7 +79,7 @@
 
     font-size:18px;
 
-    line-height:2;
+    line-height:1.5;
 }
 
 .footer-bottom{
@@ -87,7 +87,7 @@
     width:90%;
     max-width:1200px;
 
-    margin:30px auto 0;
+    margin:15px auto 0;
 
     color:#ddd;
 

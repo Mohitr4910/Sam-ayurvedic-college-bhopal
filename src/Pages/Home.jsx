@@ -114,7 +114,7 @@ function Home() {
             </span>
 
             <h1>
-              Empowering Future <br />
+              Empowering Future
               Ayurvedic Doctors
             </h1>
 
@@ -238,18 +238,21 @@ function Home() {
 
     <div className="section-divider"></div>
 
-<AnimatedContent direction="vertical"  distance={300} duration={2} ease="power4.out">
         <section className="leadership-section">
-
       <div className="leadership-heading">
         <span>OUR LEADERSHIP</span>
       </div>
 
+
+
       <div className="leadership-container">
 
         {leaders.map((leader, index) => (
+
+<AnimatedContent direction="vertical"  distance={300} duration={index+1} ease="power4.out">
           <div className="leader-card" key={index}>
 
+          
             <div className="leader-image">
               <img src={leader.image} alt={leader.name} />
             </div>
@@ -261,12 +264,12 @@ function Home() {
             </div>
 
           </div>
+        </AnimatedContent>
         ))}
 
       </div>
 
     </section>
-        </AnimatedContent>
 
      <section className="why-section">
       <div className="why-container">
