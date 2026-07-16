@@ -720,8 +720,9 @@ body{
 
 .section-title h2{
     background:#86d9e0;
+    color:#2f317f;
     font-size:50px;
-    font-family:Georgia,serif;
+    /* font-family:Georgia,serif; */
 }
 
 .section-title span{
