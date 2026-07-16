@@ -5,10 +5,13 @@ import Footer from "../Components/Footer";
 import "./Home.css";
 import crcl from "../assets/banner_img_bg.png";
 import doctor from "../assets/hero-image.png";
+
 import hero1 from "../assets/1681282034phpqmnCNq-scaled-e1741112523268.jpeg";
-import hero2 from "../assets/sam-global-university-bhopal-366330.webp";
-import hero3 from "../assets/sam-global-university-bhopal-366333.webp";
-import hero4 from "../assets/sam-global-university-bhopal-366331.webp";
+import hero2 from "../assets/Slider2.png";
+import hero3 from "../assets/Slider3.png";
+import hero4 from "../assets/Slider4.png";
+import hero5 from "../assets/Slider5.png";
+
 import AnimatedContent from "../Components/AnimatedContent";
 
 
@@ -89,7 +92,8 @@ function Home() {
           <img src={hero1} alt="Hero 1" />
           <img src={hero2} alt="Hero 2" />
           <img src={hero3} alt="Hero 3" />
-          <img src={hero4} alt="Hero 4" />
+          <img className="hero5" src={hero4} alt="Hero 4" />
+          <img src={hero5} alt="Hero 5" />
         </div>
       </section>
 

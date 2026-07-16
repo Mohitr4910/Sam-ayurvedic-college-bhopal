@@ -419,22 +419,32 @@ body{
     flex-shrink: 0;
 }
 @keyframes slide {
-    0%, 20% {
+    /* Image 1 */
+    0%, 16% {
         transform: translateX(0);
     }
 
-    25%, 45% {
+    /* Image 2 */
+    20%, 36% {
         transform: translateX(-100vw);
     }
 
-    50%, 70% {
+    /* Image 3 */
+    40%, 56% {
         transform: translateX(-200vw);
     }
 
-    75%, 95% {
+    /* Image 4 */
+    60%, 76% {
         transform: translateX(-300vw);
     }
 
+    /* Image 5 */
+    80%, 96% {
+        transform: translateX(-400vw);
+    }
+
+    /* Back to first */
     100% {
         transform: translateX(0);
     }
