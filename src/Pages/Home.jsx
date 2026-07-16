@@ -23,6 +23,15 @@ import img5 from "../assets/WhatsApp-Image-2025-09-16-at-11.16.33_317191f4-480x3
 import img6 from "../assets/WhatsApp-Image-2025-09-16-at-11.17.15_4c36d38e-480x340.jpg";
 import img7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.58-2.jpeg";
 
+
+import gallaryimg1 from "../assets/Culture-Events-6-768x512.jpg";
+import gallaryimg2 from "../assets/Events-And-Workshops-1-768x512.jpg";
+import gallaryimg3 from "../assets/Events-And-Workshops-2-768x512.jpg";
+import gallaryimg4 from "../assets/Events-And-Workshops-3-768x512.jpg";
+import gallaryimg5 from "../assets/Events-And-Workshops-4-768x512.jpg";
+import gallaryimg6 from "../assets/Events-And-Workshops-5-768x512.jpg";
+
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -42,8 +51,15 @@ const departments = [
   img7
 ];
 
+const gallaryImages = [
+  gallaryimg1,
+  gallaryimg2,
+  gallaryimg3,
+  gallaryimg4,
+  gallaryimg5,
+  gallaryimg6,
 
-
+];
 
 
 
@@ -324,6 +340,92 @@ function Home() {
 
 
 
+<section className="gallery-section">
+
+  <div className="gallery-title">
+    <h2>Gallery</h2>
+    <span></span>
+  </div>
+
+  <Swiper
+  modules={[Navigation, Autoplay]}
+  navigation
+  loop={true}
+  autoplay={{
+    delay: 2000,
+    disableOnInteraction: false,
+  }}
+  spaceBetween={25}
+  slidesPerView={3}
+  breakpoints={{
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 15,
+    },
+    576: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    992: {
+      slidesPerView: 3,
+      spaceBetween: 25,
+    },
+  }}
+  className="gallerySwiper"
+>
+  {gallaryImages.map((img, index) => (
+    <SwiperSlide key={index}>
+      <div className="gallery-card">
+        <img src={img} alt={`Gallery ${index + 1}`} />
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+</section>
+
+
+<section className="video-section">
+  <div className="video-title">
+    <h2>Our Videos</h2>
+    <span></span>
+    <p>Watch our latest videos and campus highlights</p>
+  </div>
+
+  <div className="video-container">
+
+    <div className="video-card">
+      <iframe
+        src="https://www.youtube.com/embed/NX-VW1-tOlk"
+        title="Video 1"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+    </div>
+
+    <div className="video-card">
+      <iframe
+        src="https://www.youtube.com/embed/7pLXYMF5ZaM"
+        title="Video 2"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+    </div>
+
+    <div className="video-card">
+      <iframe
+        src="https://www.youtube.com/embed/OyAz2E08Nyo"
+        title="Video 3"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+    </div>
+
+  </div>
+</section>
 
     </>
   );
