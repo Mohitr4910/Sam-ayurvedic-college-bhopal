@@ -16,6 +16,7 @@ import {
   ArrowRight,
   MapPin,
 } from "lucide-react";
+import AnimatedContent from "../Components/AnimatedContent";
 
 const COLORS = {
   navy: "#0F3557",
@@ -155,6 +156,10 @@ export default function FacilitiesPage() {
       <section style={{ padding: "56px 20px" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
           {FACILITIES.map(({ icon: Icon, title, text }, i) => (
+            
+            <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out">
+
+            
             <div
               key={title}
               style={{
@@ -164,7 +169,8 @@ export default function FacilitiesPage() {
                 background: "#fff",
                 borderTop: `3px solid ${i % 2 === 0 ? COLORS.navy : COLORS.orange}`,
               }}
-            >
+              >
+
               <div
                 style={{
                   width: 46,
@@ -177,7 +183,7 @@ export default function FacilitiesPage() {
                   color: i % 2 === 0 ? COLORS.navy : COLORS.orangeDeep,
                   marginBottom: 16,
                 }}
-              >
+                >
                 <Icon size={22} strokeWidth={1.7} />
               </div>
               <h4 style={{ fontFamily: "'Fraunces', serif", fontSize: 17.5, fontWeight: 600, color: COLORS.navy, margin: "0 0 8px" }}>
@@ -185,12 +191,14 @@ export default function FacilitiesPage() {
               </h4>
               <p style={{ fontSize: 14.5, color: COLORS.slate, lineHeight: 1.6, margin: 0 }}>{text}</p>
             </div>
+                </AnimatedContent>
           ))}
         </div>
       </section>
 
       {/* CTA band */}
       <section style={{ padding: "0 20px 56px" }}>
+        <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out">
         <div
           style={{
             maxWidth: 1180,
@@ -205,6 +213,9 @@ export default function FacilitiesPage() {
             gap: 20,
           }}
         >
+
+
+
           <div>
             <h3 style={{ fontFamily: "'Fraunces', serif", color: "#fff", fontSize: 22, margin: "0 0 6px" }}>
               Planning a campus visit?
@@ -228,10 +239,11 @@ export default function FacilitiesPage() {
               textDecoration: "none",
               whiteSpace: "nowrap",
             }}
-          >
+            >
             Plan a Visit <ArrowRight size={16} />
           </a>
         </div>
+            </AnimatedContent>
       </section>
 
     </div>

@@ -309,9 +309,16 @@ export default function CoursesPage() {
       <section style={{ paddingTop: 0 }}>
         <div className="container content-grid">
           <div>
+            <AnimatedContent direction="horizontal" reverse  distance={200} duration={2} ease="power4.out">
+
+
             <h2>About the programme</h2>
             <p>The Bachelor of Ayurvedic Medicine and Surgery (BAMS) is an undergraduate degree recognised by the National Commission for Indian System of Medicine (NCISM) and the Department of AYUSH. It combines the study of classical Samhita texts with modern basic sciences — anatomy, physiology, pathology and pharmacology — before moving into clinical postings across all fourteen departments.</p>
             <p>The course is organised into four professional years, followed by a compulsory one-year rotatory internship in the attached teaching hospital.</p>
+
+            </AnimatedContent>
+            <AnimatedContent direction="horizontal" reverse  distance={200} duration={3} ease="power4.out">
+
 
             <h3>Eligibility</h3>
             <table className="plain">
@@ -325,14 +332,17 @@ export default function CoursesPage() {
                 ))}
               </tbody>
             </table>
+                </AnimatedContent>
 
             <h3>Curriculum, professional-wise</h3>
             <p>Order matters here — each professional year is a prerequisite for the next, so the syllabus is presented as a sequence rather than a menu.</p>
             <ol className="timeline">
-              {TIMELINE.map((t) => (
+              {TIMELINE.map((t, index) => (
                 <li key={t.title} className={`tone-${t.tone}`}>
+            <AnimatedContent direction="vertical"   distance={200} duration={index+1} ease="power4.out">
                   <h4>{t.title}</h4>
                   <p>{t.desc}</p>
+            </AnimatedContent>
                 </li>
               ))}
             </ol>

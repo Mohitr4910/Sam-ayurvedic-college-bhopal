@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import AnimatedContent from "../Components/AnimatedContent";
 
 /* ---------------------------------------------------------
    Data
@@ -274,17 +275,7 @@ export default function HospitalPage() {
       </div>
 
       {/* Page hero */}
-      <section style={styles.pageHero}>
-        <div style={styles.container}>
-          <div style={styles.eyebrow}>Teaching hospital</div>
-          <h1 style={styles.h1}>Hospital</h1>
-          <p style={styles.heroPara}>
-            The attached Ayurvedic hospital where classroom learning turns into
-            supervised patient care, from first professional year onward.
-          </p>
-        </div>
-      </section>
-
+      
       {/* Stat strip */}
       <section>
         <div style={styles.container}>
@@ -343,6 +334,9 @@ export default function HospitalPage() {
           </div>
 
           <div>
+            <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out">
+
+            
             <div style={styles.pullCard}>
               <h4 style={styles.h4}>OPD timing</h4>
               <p style={styles.para}>
@@ -351,6 +345,11 @@ export default function HospitalPage() {
                 9:00 AM – 2:00 PM
               </p>
             </div>
+            </AnimatedContent>
+
+            <AnimatedContent direction="vertical"   distance={250} duration={2} ease="power4.out">
+
+
             <div style={{ ...styles.pullCard, marginTop: 18, borderLeftColor: "var(--gold, #b8860b)" }}>
               <h4 style={styles.h4}>Registration</h4>
               <p style={styles.para}>
@@ -359,16 +358,21 @@ export default function HospitalPage() {
                 available.
               </p>
             </div>
+            </AnimatedContent>
+            <AnimatedContent direction="vertical"   distance={300} duration={2} ease="power4.out">
+
+
             <div style={{ ...styles.pullCard, marginTop: 18, borderLeftColor: "var(--red, #8c2f2f)" }}>
-              <h4 style={styles.h4}>Emergency contact</h4>
               <p style={styles.para}>
                 (+91) 70247 70000
                 <br />
                 care@samayurveda.in
               </p>
             </div>
+            </AnimatedContent>
           </div>
         </div>
+              <h4 style={styles.h4}>Emergency contact</h4>
       </section>
 
       {/* ===================== HOSPITAL GALLERY ===================== */}

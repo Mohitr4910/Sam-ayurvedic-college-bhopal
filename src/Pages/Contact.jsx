@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AnimatedContent from "../Components/AnimatedContent";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -217,7 +218,11 @@ export default function ContactPage() {
 
       <section>
         <div className="container">
+            <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out">
           <div className="contact-cards">
+           
+
+           
             <div className="contact-card">
               <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
                 <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" />
@@ -225,6 +230,7 @@ export default function ContactPage() {
               <h4>Phone</h4>
               <p><a href="tel:+917024770000">(+91) 70247 70000</a></p>
             </div>
+           
             <div className="contact-card">
               <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
                 <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -233,6 +239,8 @@ export default function ContactPage() {
               <h4>Email</h4>
               <p><a href="mailto:care@samayurveda.in">care@samayurveda.in</a></p>
             </div>
+           
+              
             <div className="contact-card">
               <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -242,8 +250,13 @@ export default function ContactPage() {
               <p>Sam Global University | Private university in central India, Gram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh 462022</p>
             </div>
           </div>
+            </AnimatedContent>
 
           <div className="content-grid">
+
+                          <AnimatedContent direction="horizontal" reverse   distance={200} duration={2} ease="power4.out">
+
+
             <div className="form-card">
               <h4 style={{ fontFamily: "var(--display)", color: "var(--blue-deep)", fontSize: 19, marginBottom: 18 }}>
                 Send a message
@@ -281,24 +294,37 @@ export default function ContactPage() {
                 <p className="form-note">{formNote}</p>
               </form>
             </div>
+                          </AnimatedContent>
             <div>
+
+                          <AnimatedContent direction="horizontal"   distance={200} duration={2} ease="power4.out">
+              
               <div className="campus-photo">
                 <img
                   src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=1200&auto=format&fit=crop"
                   alt="Campus herb garden"
-                />
+                  />
               </div>
+                  </AnimatedContent>
+                          <AnimatedContent direction="horizontal"   distance={200} duration={3} ease="power4.out">
+              
               <div className="map-embed">
                 <iframe
                     src="https://www.openstreetmap.org/export/embed.html?bbox=77.5186%2C23.2451%2C77.5386%2C23.2651&layer=mapnik&marker=23.255133561653512%2C77.5286225299004"
-                  title="Campus location map"
-                  loading="lazy"
-                ></iframe>
+                    title="Campus location map"
+                    loading="lazy"
+                    ></iframe>
               </div>
+                    </AnimatedContent>
+
+                          <AnimatedContent direction="horizontal"   distance={200} duration={2} ease="power4.out">
+
+                    
               <div className="pull-card">
                 <h4>Office hours</h4>
                 <p>Monday – Saturday, 9:00 AM – 5:00 PM<br />Hospital OPD: 9:00 AM – 2:00 PM</p>
               </div>
+                          </AnimatedContent>
             </div>
           </div>
         </div>
