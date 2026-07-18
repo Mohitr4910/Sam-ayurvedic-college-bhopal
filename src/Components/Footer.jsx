@@ -33,29 +33,20 @@ function Footer() {
           </div>
 
           <div className="footer-column">
-            <h3>Links</h3>
-
-            <a href="#">About Us</a>
-            <a href="#">Hospital</a>
-            <a href="#">Admission</a>
-            <a href="#">Placements</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
-          </div>
-
-          <div className="footer-column">
             <h3>Connect Us</h3>
 
             <h4>Corporate Address</h4>
 
             <p>
-              School of Ayurveda Science, Agaria
+             Sam Global University
               <br />
-              Chopda, Bilkhiria,
-              Block Sanchi,
-              Raisen,
+           Private university in central India,
               <br />
-              PIN - 464551
+               Gram Adampur Chawni,
+              Raisen Rd, Kolua Khurd, Bhopal,Madhya Pradesh
+
+              <br />
+              PIN - 462022
             </p>
 
             <h4>Phone & Email</h4>
