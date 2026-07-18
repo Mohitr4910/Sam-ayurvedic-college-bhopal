@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import "./Home.css";
-import crcl from "../assets/banner_img_bg.png";
-import doctor from "../assets/hero-image.png";
+import crcl from "../assets/banner_img_bg.webp";
+import doctor from "../assets/hero-image.webp";
 
 import hero1 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
 import hero2 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";

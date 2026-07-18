@@ -16,8 +16,32 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
+
+
+import { useEffect} from "react";
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
+
+
 function Topbar() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+
+
+const [showUploadPopup, setShowUploadPopup] = useState(false);
+
+const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
+  localStorage.getItem("adminEmail") !== null
+);
+
+
     const [menuOpen, setMenuOpen] = useState(false);
+
+
 
     return (
         <>
@@ -91,19 +115,25 @@ function Topbar() {
         <ul>
           <li><NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink></li>
           <li><NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink></li>
-          <li><NavLink to="/academic" onClick={() => setMenuOpen(false)}>Academics</NavLink></li>
           <li><NavLink to="/department" onClick={() => setMenuOpen(false)}>Department</NavLink></li>
           <li><NavLink to="/courses" onClick={() => setMenuOpen(false)}>Courses</NavLink></li>
           <li><NavLink to="/hospital" onClick={() => setMenuOpen(false)}>Hospital</NavLink></li>
           <li><NavLink to="/facilities" onClick={() => setMenuOpen(false)}>Facilities</NavLink></li>
-          <li>
-            <NavLink
-              to="/mandatory-disclosure"
-              onClick={() => setMenuOpen(false)}
-            >
-              Mandatory Disclosure
-            </NavLink>
-          </li>
+          <li><NavLink to="/academic" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
+         <li className="dropdown">
+  <span className="dropdown-title">
+    Mandatory Disclosure ▼
+  </span>
+
+  <ul className="dropdown-menu">
+  <li>
+    <a href="#">PDF 1</a>
+  </li>
+  <li>
+    <a href="#">PDF 2</a>
+  </li>
+</ul>
+</li>
         </ul>
       </nav>
     </AnimatedContent>
