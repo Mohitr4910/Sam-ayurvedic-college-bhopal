@@ -232,8 +232,61 @@ export default function HospitalPage() {
 
   return (
     <div style={styles.page}>
+      {/* Responsive rules - inline style objects can't hold media queries,
+          so the layout-critical bits (content grid, sidebar cards, gallery
+          grid, table) are driven by these classes instead. */}
+      <style>{`
+        .hp-content-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 40px;
+          max-width: 1160px;
+          margin: 0 auto;
+          padding: 40px 20px;
+        }
+        .hp-sidebar {
+          display: flex;
+          flex-direction: column;
+        }
+        .hp-table-wrap {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .hp-table-wrap table {
+          min-width: 420px;
+        }
+        .hp-gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-auto-rows: 150px;
+          gap: 14px;
+        }
+
+        @media (max-width: 900px) {
+          .hp-content-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+            padding: 32px 20px;
+          }
+          .hp-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 140px;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .hp-content-grid {
+            padding: 24px 16px;
+          }
+          .hp-gallery-grid {
+            grid-template-columns: 1fr;
+            grid-auto-rows: 180px;
+          }
+        }
+      `}</style>
+
       {/* Topbar */}
-     
+
       {/* Mobile nav */}
       <div style={{ ...styles.mobileNav, ...(mobileNavOpen ? styles.mobileNavOpen : {}) }}>
         <div style={styles.mobileCloseRow}>
@@ -276,7 +329,7 @@ export default function HospitalPage() {
 
       {/* Content grid */}
       <section style={{ paddingTop: 0 }}>
-        <div style={{ ...styles.container, ...styles.contentGrid }}>
+        <div className="hp-content-grid">
           <div>
             <h2 style={styles.h2}>Outpatient &amp; inpatient services</h2>
             <p style={styles.para}>
@@ -293,29 +346,31 @@ export default function HospitalPage() {
               reviewed before it reaches a patient.
             </p>
             <h3 style={styles.h3}>Departments seeing OPD patients</h3>
-            <table style={styles.table}>
-              <tbody>
-                <tr>
-                  <th style={styles.th}>Department</th>
-                  <th style={styles.th}>OPD days</th>
-                  <th style={styles.th}>Focus</th>
-                </tr>
-                {OPD_DEPARTMENTS.map((row) => (
-                  <tr key={row.dept}>
-                    <td style={styles.td}>{row.dept}</td>
-                    <td style={styles.td}>{row.days}</td>
-                    <td style={styles.td}>{row.focus}</td>
+            <div className="hp-table-wrap">
+              <table style={styles.table}>
+                <tbody>
+                  <tr>
+                    <th style={styles.th}>Department</th>
+                    <th style={styles.th}>OPD days</th>
+                    <th style={styles.th}>Focus</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                  {OPD_DEPARTMENTS.map((row) => (
+                    <tr key={row.dept}>
+                      <td style={styles.td}>{row.dept}</td>
+                      <td style={styles.td}>{row.days}</td>
+                      <td style={styles.td}>{row.focus}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <p style={styles.formNote}>
               Full department-wise timing is displayed at the hospital
               reception and revised each academic term.
             </p>
           </div>
 
-          <div>
+          <div className="hp-sidebar">
             <div style={styles.pullCard}>
               <h4 style={styles.h4}>OPD timing</h4>
               <p style={styles.para}>
@@ -375,7 +430,7 @@ export default function HospitalPage() {
             </div>
           </div>
 
-          <div style={styles.hgGrid}>
+          <div className="hp-gallery-grid">
             {visibleItems.map((item) => (
               <GalleryTile key={item.src} item={item} onClick={() => openLightbox(item)} />
             ))}
@@ -580,12 +635,6 @@ const styles = {
   statNum: { fontSize: 22, fontWeight: 700 },
   statLbl: { fontSize: 12, color: COLORS.muted },
 
-  contentGrid: {
-    display: "grid",
-    gridTemplateColumns: "2fr 1fr",
-    gap: 40,
-    padding: "40px 20px",
-  },
   h2: { fontSize: 26, margin: "0 0 14px" },
   h3: { fontSize: 18, margin: "24px 0 10px" },
   h4: { fontSize: 15, margin: "0 0 6px" },
@@ -624,12 +673,6 @@ const styles = {
   },
   hgFilterBtnActive: { background: COLORS.gold, borderColor: COLORS.gold, color: "#fff" },
 
-  hgGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gridAutoRows: 150,
-    gap: 14,
-  },
   hgItem: {
     position: "relative",
     overflow: "hidden",
