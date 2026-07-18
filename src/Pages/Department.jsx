@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AnimatedContent from "../Components/AnimatedContent";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -286,8 +287,13 @@ export default function DepartmentPage() {
 
       <section>
         <div className="container">
+
+
+
           <div className="dept-grid">
             {DEPARTMENTS.map((d) => (
+<AnimatedContent direction="vertical" distance={200} duration={2} ease="power4.out">
+              
               <div className={`dept-card tone-${d.tone}`} key={d.name}>
                 <div className="ico-wrap">
                   <DeptIcon className="ico" />
@@ -295,6 +301,7 @@ export default function DepartmentPage() {
                 <h4>{d.name}</h4>
                 <p>{d.desc}</p>
               </div>
+            </AnimatedContent>
             ))}
           </div>
         </div>

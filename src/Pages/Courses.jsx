@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AnimatedContent from "../Components/AnimatedContent";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -344,19 +345,28 @@ export default function CoursesPage() {
                 <p>Study of Samhita texts and Bhaishajya Kalpana runs alongside modern basic sciences from year one.</p>
               </div>
             </div>
+<AnimatedContent direction="vertical"  distance={200} duration={2} ease="power4.out">
+
 
             <div className="pull-card">
               <h4>Documents for reference</h4>
               <p>Time table and subject-wise syllabus PDFs (as prescribed by NCISM) are published on the Academics section for currently enrolled students.</p>
             </div>
+</AnimatedContent>
+            <AnimatedContent direction="vertical"  distance={200} duration={2} ease="power4.out">
+  
             <div className="pull-card" style={{ marginTop: 18, borderLeftColor: "var(--blue)" }}>
               <h4>After BAMS</h4>
               <p>Graduates may register as Ayurvedic medical practitioners, pursue MD/MS (Ayurveda) specialisation, or move into hospital, research and pharmaceutical roles — see <a href="placements.html">Placements</a>.</p>
             </div>
+</AnimatedContent>
+            <AnimatedContent direction="vertical"  distance={200} duration={2} ease="power4.out">
+  
             <div className="pull-card" style={{ marginTop: 18, borderLeftColor: "var(--orange)" }}>
               <h4>Ready to apply?</h4>
               <p>Review the full process on the <a href="admission.html">Admission</a> page.</p>
             </div>
+</AnimatedContent>
           </div>
         </div>
       </section>
