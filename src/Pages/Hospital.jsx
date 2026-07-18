@@ -132,16 +132,6 @@ const GALLERY_ITEMS = [
    Small pieces
 --------------------------------------------------------- */
 
-function TridoshaMark({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-      <circle cx="24" cy="22" r="15" fill="#3f7d5c" opacity="0.85" />
-      <circle cx="38" cy="22" r="15" fill="#c9622a" opacity="0.85" />
-      <circle cx="31" cy="36" r="15" fill="#2f6f8f" opacity="0.85" />
-    </svg>
-  );
-}
-
 function NavList({ links, onLinkClick }) {
   return (
     <ul style={styles.navUl}>
@@ -232,60 +222,42 @@ export default function HospitalPage() {
 
   return (
     <div style={styles.page}>
-      {/* Responsive rules - inline style objects can't hold media queries,
-          so the layout-critical bits (content grid, sidebar cards, gallery
-          grid, table) are driven by these classes instead. */}
+      {/* Responsive rules — media queries can't live in inline style objects,
+          so the breakpoint-only overrides sit here and target the classNames
+          used below (hg-grid / hg-item / lb-nav / etc). Inline styles above
+          still win on desktop; these narrow things down on smaller screens. */}
       <style>{`
-        .hp-content-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: 40px;
-          max-width: 1160px;
-          margin: 0 auto;
-          padding: 40px 20px;
-        }
-        .hp-sidebar {
-          display: flex;
-          flex-direction: column;
-        }
-        .hp-table-wrap {
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-        }
-        .hp-table-wrap table {
-          min-width: 420px;
-        }
-        .hp-gallery-grid {
+        .hg-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           grid-auto-rows: 150px;
           gap: 14px;
         }
+        .hg-item-big { grid-column: span 2; grid-row: span 2; }
+        .hg-item-wide { grid-column: span 2; }
+        .hg-item-tall { grid-row: span 2; }
 
         @media (max-width: 900px) {
-          .hp-content-grid {
-            grid-template-columns: 1fr;
-            gap: 28px;
-            padding: 32px 20px;
-          }
-          .hp-gallery-grid {
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: 140px;
-          }
+          .hg-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+          .content-grid { grid-template-columns: 1fr !important; }
+          .nav-desktop { display: none !important; }
+          .nav-toggle { display: inline-flex !important; }
         }
-
-        @media (max-width: 520px) {
-          .hp-content-grid {
-            padding: 24px 16px;
+        @media (max-width: 560px) {
+          .hg-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 130px;
+            gap: 8px;
           }
-          .hp-gallery-grid {
-            grid-template-columns: 1fr;
-            grid-auto-rows: 180px;
+          .hg-item-big,
+          .hg-item-wide {
+            grid-column: span 2;
           }
+          .hg-item-tall { grid-row: span 1; }
+          .hg-head { flex-direction: column; align-items: flex-start !important; }
+          .lb-nav { width: 36px !important; height: 36px !important; font-size: 18px !important; }
         }
       `}</style>
-
-      {/* Topbar */}
 
       {/* Mobile nav */}
       <div style={{ ...styles.mobileNav, ...(mobileNavOpen ? styles.mobileNavOpen : {}) }}>
@@ -329,7 +301,7 @@ export default function HospitalPage() {
 
       {/* Content grid */}
       <section style={{ paddingTop: 0 }}>
-        <div className="hp-content-grid">
+        <div className="content-grid" style={{ ...styles.container, ...styles.contentGrid }}>
           <div>
             <h2 style={styles.h2}>Outpatient &amp; inpatient services</h2>
             <p style={styles.para}>
@@ -346,7 +318,7 @@ export default function HospitalPage() {
               reviewed before it reaches a patient.
             </p>
             <h3 style={styles.h3}>Departments seeing OPD patients</h3>
-            <div className="hp-table-wrap">
+            <div style={styles.tableWrap}>
               <table style={styles.table}>
                 <tbody>
                   <tr>
@@ -370,7 +342,7 @@ export default function HospitalPage() {
             </p>
           </div>
 
-          <div className="hp-sidebar">
+          <div>
             <div style={styles.pullCard}>
               <h4 style={styles.h4}>OPD timing</h4>
               <p style={styles.para}>
@@ -402,7 +374,7 @@ export default function HospitalPage() {
       {/* ===================== HOSPITAL GALLERY ===================== */}
       <section style={styles.hgSection}>
         <div style={styles.container}>
-          <div style={styles.hgHead}>
+          <div className="hg-head" style={styles.hgHead}>
             <div>
               <div style={styles.eyebrow}>Inside the hospital</div>
               <h2 style={{ ...styles.h2, marginBottom: 6 }}>
@@ -430,12 +402,14 @@ export default function HospitalPage() {
             </div>
           </div>
 
-          <div className="hp-gallery-grid">
+          {/* grid + spans now come from the .hg-grid / .hg-item-* CSS
+              classes above, so the layout can change per breakpoint */}
+          <div className="hg-grid">
             {visibleItems.map((item) => (
               <GalleryTile key={item.src} item={item} onClick={() => openLightbox(item)} />
             ))}
           </div>
-         
+
         </div>
       </section>
 
@@ -454,20 +428,28 @@ export default function HospitalPage() {
           >
             ✕
           </button>
-          <button aria-label="Previous" onClick={showPrev} style={{ ...styles.lbNav, left: 18 }}>
+          <button
+            aria-label="Previous"
+            onClick={showPrev}
+            className="lb-nav"
+            style={{ ...styles.lbNav, left: 10 }}
+          >
             ‹
           </button>
-          <div>
+          <div style={styles.lbImgWrap}>
             <img src={current.src} alt={current.alt} style={styles.lbImg} />
             <div style={styles.lbCap}>{current.cap}</div>
           </div>
-          <button aria-label="Next" onClick={showNext} style={{ ...styles.lbNav, right: 18 }}>
+          <button
+            aria-label="Next"
+            onClick={showNext}
+            className="lb-nav"
+            style={{ ...styles.lbNav, right: 10 }}
+          >
             ›
           </button>
         </div>
       )}
-
-      {/* Footer */}
     </div>
   );
 }
@@ -478,21 +460,22 @@ export default function HospitalPage() {
 
 function GalleryTile({ item, onClick }) {
   const [hover, setHover] = useState(false);
-  const sizeStyle =
+  const sizeClass =
     item.size === "big"
-      ? { gridColumn: "span 2", gridRow: "span 2" }
+      ? "hg-item-big"
       : item.size === "wide"
-      ? { gridColumn: "span 2" }
+      ? "hg-item-wide"
       : item.size === "tall"
-      ? { gridRow: "span 2" }
-      : {};
+      ? "hg-item-tall"
+      : "";
 
   return (
     <div
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      style={{ ...styles.hgItem, ...sizeStyle }}
+      className={sizeClass}
+      style={styles.hgItem}
     >
       <img
         src={item.src}
@@ -539,31 +522,6 @@ const styles = {
   },
   container: { maxWidth: 1160, margin: "0 auto", padding: "0 20px" },
 
-  topbar: { background: COLORS.ink, color: "#fff", fontSize: 13 },
-  topbarRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "8px 0",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  topbarLeft: { display: "flex", gap: 18 },
-  topbarRight: { display: "flex", gap: 18 },
-  topbarLink: { color: "#eee", textDecoration: "none" },
-
-  header: { borderBottom: `1px solid ${COLORS.border}`, background: "#fff" },
-  navRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 24,
-    padding: "14px 20px",
-  },
-  brand: { display: "flex", alignItems: "center", gap: 10, textDecoration: "none", color: COLORS.ink },
-  brandText: { display: "flex", flexDirection: "column", lineHeight: 1.15 },
-  brandName: { fontWeight: 700, fontSize: 18 },
-  brandSub: { fontSize: 11, color: COLORS.muted },
-
-  primaryNavDesktop: { flex: 1, display: "flex", justifyContent: "center" },
   navUl: { display: "flex", gap: 22, listStyle: "none", margin: 0, padding: 0, flexWrap: "wrap" },
   navLink: { textDecoration: "none", color: COLORS.ink, fontSize: 14 },
   navLinkActive: { color: COLORS.red, fontWeight: 600 },
@@ -582,23 +540,12 @@ const styles = {
   },
   dropdownLink: { display: "block", padding: "6px 10px", textDecoration: "none", color: COLORS.ink, fontSize: 13 },
 
-  navCta: {
-    background: COLORS.gold,
-    color: "#fff",
-    padding: "9px 18px",
-    borderRadius: 999,
-    textDecoration: "none",
-    fontSize: 13,
-    whiteSpace: "nowrap",
-  },
   navToggle: {
-    display: "none",
     background: "none",
     border: "none",
     cursor: "pointer",
     fontSize: 20,
   },
-  burgerLine: { display: "block", width: 22, height: 2, background: COLORS.ink, margin: "4px 0" },
 
   mobileNav: {
     position: "fixed",
@@ -614,7 +561,6 @@ const styles = {
   mobileCloseRow: { display: "flex", justifyContent: "flex-end", marginBottom: 20 },
 
   pageHero: { background: COLORS.cream, padding: "48px 0" },
-  crumb: { fontSize: 12, color: COLORS.muted, marginBottom: 8 },
   eyebrow: { fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600, marginBottom: 6 },
   h1: { fontSize: "clamp(28px,4vw,42px)", margin: "0 0 10px" },
   heroPara: { color: COLORS.muted, maxWidth: 560, margin: 0 },
@@ -630,11 +576,18 @@ const styles = {
   statNum: { fontSize: 22, fontWeight: 700 },
   statLbl: { fontSize: 12, color: COLORS.muted },
 
+  contentGrid: {
+    display: "grid",
+    gridTemplateColumns: "2fr 1fr",
+    gap: 40,
+    padding: "40px 20px",
+  },
   h2: { fontSize: 26, margin: "0 0 14px" },
   h3: { fontSize: 18, margin: "24px 0 10px" },
   h4: { fontSize: 15, margin: "0 0 6px" },
   para: { color: "#3f3a34", lineHeight: 1.65, marginBottom: 14 },
-  table: { width: "100%", borderCollapse: "collapse", fontSize: 14 },
+  tableWrap: { overflowX: "auto" },
+  table: { width: "100%", minWidth: 420, borderCollapse: "collapse", fontSize: 14 },
   th: { textAlign: "left", padding: "8px 6px", borderBottom: `2px solid ${COLORS.ink}` },
   td: { padding: "8px 6px", borderBottom: `1px solid ${COLORS.border}` },
   formNote: { fontSize: 12, color: COLORS.muted, marginTop: 12 },
@@ -714,19 +667,21 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: 24,
+    padding: 16,
   },
-  lbImg: { maxWidth: "min(900px,92vw)", maxHeight: "82vh", borderRadius: 8, display: "block" },
+  lbImgWrap: { maxWidth: "100%" },
+  lbImg: { maxWidth: "min(900px,90vw)", maxHeight: "78vh", borderRadius: 8, display: "block", margin: "0 auto" },
   lbCap: { color: "#f1f1f1", textAlign: "center", marginTop: 12, fontSize: 14 },
   lbClose: {
     position: "absolute",
-    top: 22,
-    right: 28,
+    top: 16,
+    right: 16,
     color: "#fff",
     fontSize: 26,
     background: "none",
     border: "none",
     cursor: "pointer",
+    zIndex: 2,
   },
   lbNav: {
     position: "absolute",
@@ -740,28 +695,6 @@ const styles = {
     height: 44,
     borderRadius: "50%",
     cursor: "pointer",
-  },
-
-  footer: { background: COLORS.ink, color: "#e8e5df", padding: "48px 0 20px", marginTop: 20 },
-  footerGrid: {
-    display: "grid",
-    gridTemplateColumns: "2fr 1fr 1fr 1fr",
-    gap: 32,
-    paddingBottom: 28,
-  },
-  footerBrand: { display: "flex", alignItems: "center", gap: 10, marginBottom: 12 },
-  footerHeading: { fontSize: 14, marginBottom: 12, color: "#fff" },
-  footerList: { listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 },
-  footerLink: { color: "#cfcabf", textDecoration: "none", fontSize: 13 },
-  footerText: { color: "#b9b4a9", fontSize: 13, lineHeight: 1.6, margin: "0 0 10px" },
-  footerBottom: {
-    borderTop: "1px solid rgba(255,255,255,.12)",
-    paddingTop: 16,
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    gap: 8,
-    fontSize: 12,
-    color: "#9c968a",
+    zIndex: 2,
   },
 };
