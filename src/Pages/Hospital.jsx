@@ -435,12 +435,7 @@ export default function HospitalPage() {
               <GalleryTile key={item.src} item={item} onClick={() => openLightbox(item)} />
             ))}
           </div>
-
-          <div style={styles.hgMore}>
-            <a href="gallery.html" style={styles.hgMoreLink}>
-              View full campus gallery
-            </a>
-          </div>
+         
         </div>
       </section>
 
