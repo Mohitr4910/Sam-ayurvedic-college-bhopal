@@ -23,6 +23,8 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
+// CMS API base URL - set VITE_API_URL in .env to override (e.g. http://localhost/sam-ayurveda-cms-php for local PHP dev)
+const API_BASE = import.meta.env.VITE_API_URL || "https://cms.samayurveda.in";
 
 function Topbar() {
   const navigate = useNavigate();
@@ -38,6 +40,17 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
   localStorage.getItem("adminEmail") !== null
 );
 
+  const [disclosures, setDisclosures] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/api/index.php?type=mandatory_disclosure`)
+      .then((res) => setDisclosures(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => {
+        console.error("Failed to load Mandatory Disclosure list:", err);
+        setDisclosures([]);
+      });
+  }, []);
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -120,20 +133,23 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
           <li><NavLink to="/hospital" onClick={() => setMenuOpen(false)}>Hospital</NavLink></li>
           <li><NavLink to="/facilities" onClick={() => setMenuOpen(false)}>Facilities</NavLink></li>
           <li><NavLink to="/academic" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
+         {disclosures.length > -1 && (
          <li className="dropdown">
   <span className="dropdown-title">
     Mandatory Disclosure ▼
   </span>
 
   <ul className="dropdown-menu">
-  <li>
-    <a href="#">PDF 1</a>
-  </li>
-  <li>
-    <a href="#">PDF 2</a>
-  </li>
+  {disclosures.map((doc) => (
+    <li key={doc.id}>
+      <a href={doc.file} target="_blank" rel="noopener noreferrer">
+        {doc.title}
+      </a>
+    </li>
+  ))}
 </ul>
 </li>
+         )}
         </ul>
       </nav>
     </AnimatedContent>

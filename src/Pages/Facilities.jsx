@@ -109,11 +109,6 @@ export default function FacilitiesPage() {
         * { box-sizing: border-box; }
       `}</style>
 
-      {/* Topbar */}
-      
-
-      {/* Header / Nav */}
-    
       {/* Mobile nav drawer */}
       {mobileOpen && (
         <div style={{ position: "fixed", inset: 0, background: "#fff", zIndex: 50, padding: 20, overflowY: "auto" }}>
