@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimatedContent from "../Components/AnimatedContent";
+import { fetchList } from "../lib/cms";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -24,7 +25,7 @@ const NAV_ITEMS = [
 
 const TONES = ["green", "blue", "orange"];
 
-const DEPARTMENTS = [
+const FALLBACK_DEPARTMENTS = [
   { name: "Kaya Chikitsa", desc: "General medicine — internal disorders, chronic disease management and pulse-based diagnosis." },
   { name: "Shalya Tantra", desc: "Ayurvedic surgery, wound care, ksharsutra therapy and pre/post-operative management." },
   { name: "Panchakarma", desc: "The five classical purification therapies — Vamana, Virechana, Basti, Nasya and Raktamokshana." },
@@ -128,6 +129,27 @@ function PrimaryNav() {
 
 export default function DepartmentPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [departments, setDepartments] = useState(FALLBACK_DEPARTMENTS);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchList("department").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setDepartments(
+          rows.map((r, i) => ({
+            name: r.name,
+            desc: r.description,
+            head: r.head_of_department,
+            image: r.image || null,
+            tone: TONES[i % TONES.length],
+          }))
+        );
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="sam-site">
@@ -291,14 +313,19 @@ export default function DepartmentPage() {
 
 
           <div className="dept-grid">
-            {DEPARTMENTS.map((d) => (
-<AnimatedContent direction="vertical" distance={200} duration={2} ease="power4.out">
+            {departments.map((d) => (
+<AnimatedContent direction="vertical" distance={200} duration={2} ease="power4.out" key={d.name}>
               
-              <div className={`dept-card tone-${d.tone}`} key={d.name}>
-                <div className="ico-wrap">
-                  <DeptIcon className="ico" />
-                </div>
+              <div className={`dept-card tone-${d.tone}`}>
+                {d.image ? (
+                  <img src={d.image} alt={d.name} style={{ width: 40, height: 40, borderRadius: 10, objectFit: "cover", marginBottom: 12 }} />
+                ) : (
+                  <div className="ico-wrap">
+                    <DeptIcon className="ico" />
+                  </div>
+                )}
                 <h4>{d.name}</h4>
+                {d.head && <p style={{ fontWeight: 600, marginBottom: 4 }}>{d.head}</p>}
                 <p>{d.desc}</p>
               </div>
             </AnimatedContent>

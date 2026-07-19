@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import crcl from "../assets/banner_img_bg.webp";
 import doctor from "../assets/hero-image.webp";
+import { fetchSingle, fetchList } from "../lib/cms";
 
 import hero1 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
 import hero2 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";
@@ -38,7 +39,7 @@ import "swiper/css/navigation";
 
 import doctorImg from "../assets/bg.jpg";
 
-const departments = [
+const FALLBACK_DEPARTMENT_IMAGES = [
   img1,
   img2,
   img3,
@@ -48,7 +49,7 @@ const departments = [
   img7
 ];
 
-const gallaryImages = [
+const FALLBACK_GALLERY_IMAGES = [
   gallaryimg1,
   gallaryimg2,
   gallaryimg3,
@@ -65,7 +66,7 @@ import leader3 from "../assets/Leadership_director.jpg";
 import leader2 from "../assets/Leadership_executive_director.jpg";
 import leader4 from "../assets/photo-Dr.A.K-Singh.jpeg.jpg";
 
-const leaders = [
+const FALLBACK_LEADERS = [
   {
     image: leader1,
     name: "Dr. Harpreet Singh Saluja",
@@ -96,7 +97,83 @@ const leaders = [
   },
 ];
 
+// Fallback Home single-type content, shown until the CMS responds or
+// if it is unreachable.
+const FALLBACK_HOME = {
+  hero_title: "Empowering Future Ayurvedic Doctors",
+  hero_subtitle:
+    "SAM School of Ayurveda Science, a prestigious addition to SAM Global University, is dedicated to advancing the field of Ayurvedic medicine through its Bachelor of Ayurvedic Medicine and Surgery (BAMS) program. Established in 2019 under the Shri Guru Hargobind Society, SAM Global University is recognized as the leading private university in Bhopal, Madhya Pradesh.With a legacy spanning six decades, SGU has consistently set benchmarks in education and remains committed to excellence. The university’s recognition under the Madhya Pradesh Niji Vishwavidhyalaya (Sthapana Avam Sanchalan) Adhiniyam 2007 and by the UGC underscores its dedication to maintaining high standards.The SAM School of Ayurveda Science continues this tradition by offering comprehensive training in Ayurveda, preparing students to become proficient practitioners and contributors to the field.",
+  hero_cta_label: "Apply for Admission",
+  hero_cta_link: "/admission",
+};
+
+// Fallback Guiding Principles text - reused from the About single type
+// (vision_text / mission_text / goal_text) when available.
+const FALLBACK_VMG = {
+  vision_text:
+    "To be recognized around the globe as an essence of true Ayurveda upholding the authentic principles in order to propagate health & well-being worldwide.",
+  mission_text:
+    "To play the pivotal role in delivering quality health care to the society, especially in rural & remote areas through authentic Ayurveda.",
+  goal_text:
+    "To be the best among equals in promotion & propagation of education and practice of Ayurveda in the community over the next five years.",
+};
+
 function Home() {
+  const [home, setHome] = useState(FALLBACK_HOME);
+  const [vmg, setVmg] = useState(FALLBACK_VMG);
+  const [departmentImages, setDepartmentImages] = useState(
+    FALLBACK_DEPARTMENT_IMAGES.map((src, i) => ({ src, alt: `Department ${i + 1}` }))
+  );
+  const [galleryImages, setGalleryImages] = useState(
+    FALLBACK_GALLERY_IMAGES.map((src, i) => ({ src, alt: `Gallery ${i + 1}` }))
+  );
+  const [leaders, setLeaders] = useState(FALLBACK_LEADERS);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetchSingle("home").then((data) => {
+      if (isMounted && data) setHome({ ...FALLBACK_HOME, ...data });
+    });
+
+    fetchSingle("about").then((data) => {
+      if (isMounted && data && (data.vision_text || data.mission_text || data.goal_text)) {
+        setVmg({ ...FALLBACK_VMG, ...data });
+      }
+    });
+
+    fetchList("department").then((rows) => {
+      const withImages = rows.filter((r) => r.image);
+      if (isMounted && withImages.length > 0) {
+        setDepartmentImages(withImages.map((r) => ({ src: r.image, alt: r.name })));
+      }
+    });
+
+    fetchList("gallery").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setGalleryImages(rows.map((r) => ({ src: r.image, alt: r.title || "Gallery" })));
+      }
+    });
+
+    fetchList("leader").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setLeaders(
+          rows.map((r) => ({
+            image: r.photo || "",
+            name: r.name,
+            designation: r.designation,
+            organization: r.organization,
+            description: r.bio,
+          }))
+        );
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <>
 
@@ -130,16 +207,15 @@ function Home() {
             </span>
 
             <h1>
-              Empowering Future
-              Ayurvedic Doctors
+              {home.hero_title}
             </h1>
 
             <p>
-              SAM School of Ayurveda Science, a prestigious addition to SAM Global University, is dedicated to advancing the field of Ayurvedic medicine through its Bachelor of Ayurvedic Medicine and Surgery (BAMS) program. Established in 2019 under the Shri Guru Hargobind Society, SAM Global University is recognized as the leading private university in Bhopal, Madhya Pradesh.With a legacy spanning six decades, SGU has consistently set benchmarks in education and remains committed to excellence. The university’s recognition under the Madhya Pradesh Niji Vishwavidhyalaya (Sthapana Avam Sanchalan) Adhiniyam 2007 and by the UGC underscores its dedication to maintaining high standards.The SAM School of Ayurveda Science continues this tradition by offering comprehensive training in Ayurveda, preparing students to become proficient practitioners and contributors to the field.
+              {home.hero_subtitle}
             </p>
 
-            <Link to="/admission" className="hero-btn">
-              Apply for Admission
+            <Link to={home.hero_cta_link || "/admission"} className="hero-btn">
+              {home.hero_cta_label || "Apply for Admission"}
             </Link>
 
               </AnimatedContent>
@@ -153,7 +229,7 @@ function Home() {
               </div>
 
               <img
-                src={doctor}
+                src={home.hero_image || doctor}
                 alt="SAM Ayurveda"
                 className="hero-img"
               />
@@ -175,9 +251,7 @@ function Home() {
         <div class="vmg-card">
             <h3>Vision</h3>
             <p>
-                To be recognized around the globe as an essence of true Ayurveda
-                upholding the authentic principles in order to propagate health &
-                well-being worldwide.
+                {vmg.vision_text}
             </p>
         </div>
 
@@ -185,18 +259,14 @@ function Home() {
    
             <h3>Mission</h3>
             <p>
-                To play the pivotal role in delivering quality health care to the
-                society, especially in rural & remote areas through authentic
-                Ayurveda.
+                {vmg.mission_text}
             </p>
         </div>
 
         <div class="vmg-card">
             <h3>Goal</h3>
             <p>
-                To be the best among equals in promotion & propagation of
-                education and practice of Ayurveda in the community over the next
-                five years.
+                {vmg.goal_text}
             </p>
         </div>
 
@@ -241,10 +311,10 @@ function Home() {
         }}
         className="departmentSwiper"
       >
-        {departments.map((image, index) => (
+        {departmentImages.map((image, index) => (
           <SwiperSlide key={index}>
             <div className="department-card">
-              <img src={image} alt={`Department ${index + 1}`} />
+              <img src={image.src} alt={image.alt} />
             </div>
           </SwiperSlide>
         ))}
@@ -372,10 +442,10 @@ function Home() {
   }}
   className="gallerySwiper"
 >
-  {gallaryImages.map((img, index) => (
+  {galleryImages.map((img, index) => (
     <SwiperSlide key={index}>
       <div className="gallery-card">
-        <img src={img} alt={`Gallery ${index + 1}`} />
+        <img src={img.src} alt={img.alt} />
       </div>
     </SwiperSlide>
   ))}

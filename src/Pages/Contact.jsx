@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimatedContent from "../Components/AnimatedContent";
+import { fetchSingle } from "../lib/cms";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -53,9 +54,34 @@ function PrimaryNav() {
   );
 }
 
+// Fallback contact details, shown until the CMS responds or if it is
+// unreachable.
+const FALLBACK_CONTACT = {
+  address:
+    "Sam Global University | Private university in central India, Gram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh 462022",
+  phone: "(+91) 70247 70000",
+  email: "care@samayurveda.in",
+  office_hours: "Monday – Saturday, 9:00 AM – 5:00 PM\nHospital OPD: 9:00 AM – 2:00 PM",
+  map_embed_url:
+    "https://www.openstreetmap.org/export/embed.html?bbox=77.5186%2C23.2451%2C77.5386%2C23.2651&layer=mapnik&marker=23.255133561653512%2C77.5286225299004",
+};
+
 export default function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formNote, setFormNote] = useState("We typically reply within one working day.");
+  const [contact, setContact] = useState(FALLBACK_CONTACT);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchSingle("contact").then((data) => {
+      if (isMounted && data) {
+        setContact({ ...FALLBACK_CONTACT, ...data });
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -228,7 +254,7 @@ export default function ContactPage() {
                 <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" />
               </svg>
               <h4>Phone</h4>
-              <p><a href="tel:+917024770000">(+91) 70247 70000</a></p>
+              <p><a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>{contact.phone}</a></p>
             </div>
            
             <div className="contact-card">
@@ -237,7 +263,7 @@ export default function ContactPage() {
                 <path d="m2 7 10 6L22 7" />
               </svg>
               <h4>Email</h4>
-              <p><a href="mailto:care@samayurveda.in">care@samayurveda.in</a></p>
+              <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
             </div>
            
               
@@ -247,7 +273,7 @@ export default function ContactPage() {
                 <circle cx="12" cy="10" r="3" />
               </svg>
               <h4>Campus address</h4>
-              <p>Sam Global University | Private university in central India, Gram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh 462022</p>
+              <p>{contact.address}</p>
             </div>
           </div>
             </AnimatedContent>
@@ -310,7 +336,7 @@ export default function ContactPage() {
               
               <div className="map-embed">
                 <iframe
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=77.5186%2C23.2451%2C77.5386%2C23.2651&layer=mapnik&marker=23.255133561653512%2C77.5286225299004"
+                    src={contact.map_embed_url}
                     title="Campus location map"
                     loading="lazy"
                     ></iframe>
@@ -322,7 +348,14 @@ export default function ContactPage() {
                     
               <div className="pull-card">
                 <h4>Office hours</h4>
-                <p>Monday – Saturday, 9:00 AM – 5:00 PM<br />Hospital OPD: 9:00 AM – 2:00 PM</p>
+                <p>
+                  {contact.office_hours.split("\n").map((line, i, arr) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </p>
               </div>
                           </AnimatedContent>
             </div>

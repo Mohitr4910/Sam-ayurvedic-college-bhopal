@@ -84,3 +84,78 @@
       line-height: 1.8;
     }
   }
+
+  /* Vision / Mission / Goal cards - populated from the About single
+     type in the CMS. Only rendered when at least one field is set. */
+  .about-vmg {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .about-vmg-card {
+    background: #f7f9fb;
+    border-radius: 10px;
+    border-top: 3px solid #1f658a;
+    padding: 26px 24px;
+  }
+
+  .about-vmg-card h3 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #17306e;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .about-vmg-card p {
+    text-align: left;
+    color: #4a4a4a;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* Principal's message - populated from the About single type. */
+  .about-principal {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+    padding: 0 40px;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .about-principal-photo {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .about-principal-text h3 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #17306e;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .about-principal-text p {
+    text-align: left;
+    color: #4a4a4a;
+    font-size: 1.05rem;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 768px) {
+    .about-principal {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .about-principal-text p {
+      text-align: center;
+    }
+  }

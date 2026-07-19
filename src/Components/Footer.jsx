@@ -1,76 +1,110 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import "./Footer.css";
+import { fetchSingle } from "../lib/cms";
+
+// Fallback contact details - shown until the CMS responds, and kept as
+// a safety net if the CMS is unreachable.
+const FALLBACK_CONTACT = {
+  address:
+    "Sam Global University\nPrivate university in central India,\nGram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh\nPIN - 462022",
+  phone: "(+91) 70247 70000",
+  email: "care@samayurveda.in",
+  facebook_url: "",
+  instagram_url: "",
+  youtube_url: "",
+};
+
 function Footer() {
+  const [contact, setContact] = useState(FALLBACK_CONTACT);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchSingle("contact").then((data) => {
+      if (isMounted && data) {
+        setContact({ ...FALLBACK_CONTACT, ...data });
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <>
-     <footer
-      className="footer"
-    >
-      <div className="footer-overlay">
+      <footer className="footer">
+        <div className="footer-overlay">
+          <div className="footer-container">
+            <div className="footer-column">
+              <h3>Important Links</h3>
 
-        <div className="footer-container">
+              <a href="#">AICTE New Delhi</a>
+              <a href="#">NCISM</a>
+              <a href="#">MP Online</a>
+              <a href="#">Fee Committee Bhopal</a>
+              <a href="#">Anti Ragging Cell</a>
+              <a href="#">SAM Global University</a>
+            </div>
 
-          <div className="footer-column">
-            <h3>Important Links</h3>
+            <div className="footer-column">
+              <h3>Quick Links</h3>
 
-            <a href="#">AICTE New Delhi</a>
-            <a href="#">NCISM</a>
-            <a href="#">MP Online</a>
-            <a href="#">Fee Committee Bhopal</a>
-            <a href="#">Anti Ragging Cell</a>
-            <a href="#">SAM Global University</a>
+              <a href="/about">About Us</a>
+              <a href="/hospital">Hospital</a>
+              <a href="/admission">Admission</a>
+              <a href="/placements">Placements</a>
+              <a href="/gallery">Gallery</a>
+              <a href="/academic">Contact</a>
+            </div>
+
+            <div className="footer-column">
+              <h3>Connect Us</h3>
+
+              <h4>Corporate Address</h4>
+
+              <p>
+                {contact.address.split("\n").map((line, i, arr) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    {i < arr.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </p>
+
+              <h4>Phone & Email</h4>
+
+              <p>{contact.phone}</p>
+
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+
+              {(contact.facebook_url || contact.instagram_url || contact.youtube_url) && (
+                <div className="footer-social">
+                  {contact.facebook_url && (
+                    <a href={contact.facebook_url} target="_blank" rel="noopener noreferrer">
+                      Facebook
+                    </a>
+                  )}
+                  {contact.instagram_url && (
+                    <a href={contact.instagram_url} target="_blank" rel="noopener noreferrer">
+                      Instagram
+                    </a>
+                  )}
+                  {contact.youtube_url && (
+                    <a href={contact.youtube_url} target="_blank" rel="noopener noreferrer">
+                      YouTube
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="footer-column">
-            <h3>Quick Links</h3>
-
-            <a href="#">About Us</a>
-            <a href="#">Hospital</a>
-            <a href="#">Admission</a>
-            <a href="#">Placements</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
+          <div className="footer-bottom">
+            © {new Date().getFullYear()} SAM Global University. All Rights Reserved
           </div>
-
-          <div className="footer-column">
-            <h3>Connect Us</h3>
-
-            <h4>Corporate Address</h4>
-
-            <p>
-             Sam Global University
-              <br />
-           Private university in central India,
-              <br />
-               Gram Adampur Chawni,
-              Raisen Rd, Kolua Khurd, Bhopal,Madhya Pradesh
-
-              <br />
-              PIN - 462022
-            </p>
-
-            <h4>Phone & Email</h4>
-
-            <p>(+91) 70247 70000</p>
-
-            <a href="mailto:care@samayurveda.in">
-              care@samayurveda.in
-            </a>
-
-          </div>
-
         </div>
-
-        <div className="footer-bottom">
-          © 2019 SAM Global University. All Rights Reserved
-        </div>
-
-      </div>
-    </footer>
-    
-    
+      </footer>
     </>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

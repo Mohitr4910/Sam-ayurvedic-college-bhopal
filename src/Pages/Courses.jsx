@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimatedContent from "../Components/AnimatedContent";
+import { fetchList } from "../lib/cms";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html" },
@@ -22,12 +23,21 @@ const NAV_ITEMS = [
   { label: "Contact", href: "contact.html" },
 ];
 
-const STATS = [
+const FALLBACK_STATS = [
   { num: "5.5 yrs", lbl: "Duration incl. internship", tone: "green" },
   { num: "4", lbl: "Professional years", tone: "blue" },
   { num: "NEET", lbl: "Entrance requirement", tone: "orange" },
   { num: "NCISM", lbl: "Regulatory body", tone: "green" },
 ];
+
+const FALLBACK_COURSE = {
+  name: "BAMS",
+  duration: "5.5 yrs",
+  eligibility: "",
+  description:
+    "The Bachelor of Ayurvedic Medicine and Surgery (BAMS) is an undergraduate degree recognised by the National Commission for Indian System of Medicine (NCISM) and the Department of AYUSH. It combines the study of classical Samhita texts with modern basic sciences — anatomy, physiology, pathology and pharmacology — before moving into clinical postings across all fourteen departments.",
+  brochure: "",
+};
 
 const ELIGIBILITY = [
   { req: "Qualifying exam", criteria: "10+2 with Physics, Chemistry, Biology (PCB)" },
@@ -123,6 +133,30 @@ function PrimaryNav() {
 
 export default function CoursesPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [stats, setStats] = useState(FALLBACK_STATS);
+  const [course, setCourse] = useState(FALLBACK_COURSE);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchList("course").then((rows) => {
+      if (!isMounted || rows.length === 0) return;
+      // BAMS is the flagship (and currently only) course - prefer an
+      // entry named after it, otherwise fall back to the first course
+      // entered in the CMS.
+      const bams = rows.find((r) => /bams/i.test(r.name || "")) || rows[0];
+      setCourse({ ...FALLBACK_COURSE, ...bams });
+      if (bams.duration) {
+        setStats((prev) => {
+          const next = [...prev];
+          next[0] = { ...next[0], num: bams.duration };
+          return next;
+        });
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="sam-site">
@@ -295,7 +329,7 @@ export default function CoursesPage() {
       <section>
         <div className="container">
           <div className="stat-strip">
-            {STATS.map((s) => (
+            {stats.map((s) => (
               <div key={s.lbl}>
                 <span className={`dot ${s.tone}`} />
                 <span className="num">{s.num}</span>
@@ -313,7 +347,7 @@ export default function CoursesPage() {
 
 
             <h2>About the programme</h2>
-            <p>The Bachelor of Ayurvedic Medicine and Surgery (BAMS) is an undergraduate degree recognised by the National Commission for Indian System of Medicine (NCISM) and the Department of AYUSH. It combines the study of classical Samhita texts with modern basic sciences — anatomy, physiology, pathology and pharmacology — before moving into clinical postings across all fourteen departments.</p>
+            <p>{course.description}</p>
             <p>The course is organised into four professional years, followed by a compulsory one-year rotatory internship in the attached teaching hospital.</p>
 
             </AnimatedContent>
@@ -332,6 +366,7 @@ export default function CoursesPage() {
                 ))}
               </tbody>
             </table>
+            {course.eligibility && <p style={{ marginTop: 14 }}>{course.eligibility}</p>}
                 </AnimatedContent>
 
             <h3>Curriculum, professional-wise</h3>
@@ -361,6 +396,11 @@ export default function CoursesPage() {
             <div className="pull-card">
               <h4>Documents for reference</h4>
               <p>Time table and subject-wise syllabus PDFs (as prescribed by NCISM) are published on the Academics section for currently enrolled students.</p>
+              {course.brochure && (
+                <p style={{ marginTop: 10 }}>
+                  <a href={course.brochure} target="_blank" rel="noopener noreferrer">Download course brochure (PDF)</a>
+                </p>
+              )}
             </div>
 </AnimatedContent>
             <AnimatedContent direction="vertical"  distance={200} duration={2} ease="power4.out">

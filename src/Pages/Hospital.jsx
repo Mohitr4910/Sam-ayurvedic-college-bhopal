@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import AnimatedContent from "../Components/AnimatedContent";
+import { fetchSingle, fetchList } from "../lib/cms";
 
 /* ---------------------------------------------------------
    Data
@@ -33,13 +34,23 @@ const STATS = [
   { num: "24×7", lbl: "Emergency & IPD" },
 ];
 
-const OPD_DEPARTMENTS = [
+const FALLBACK_OPD_DEPARTMENTS = [
   { dept: "Kaya Chikitsa", days: "Mon–Sat", focus: "General medicine" },
   { dept: "Panchakarma", days: "Mon–Sat", focus: "Purification therapies" },
   { dept: "Shalya Tantra", days: "Mon, Wed, Fri", focus: "Ayurvedic surgery" },
   { dept: "Shalakya Tantra", days: "Tue, Thu, Sat", focus: "Eye, ENT & head" },
   { dept: "Prasuti & Stri Roga", days: "Mon–Sat", focus: "Women's health" },
 ];
+
+// Fallback hospital page content, shown until the CMS responds or if
+// it is unreachable.
+const FALLBACK_HOSPITAL = {
+  title: "Hospital",
+  description:
+    "The hospital runs daily OPD sessions across all fourteen departments — from Kaya Chikitsa and Panchakarma to Shalakya and Prasuti Tantra — alongside inpatient beds for cases requiring extended Ayurvedic management, including classical Panchakarma protocols that need supervised, multi-day stays. Clinical postings rotate final-professional and internship students through each department under the direct supervision of departmental faculty, so every prescription and procedure is reviewed before it reaches a patient.",
+  opd_timings: "Monday – Saturday, 9:00 AM – 2:00 PM",
+  image: "",
+};
 
 const FILTERS = [
   { key: "all", label: "All" },
@@ -177,6 +188,40 @@ export default function HospitalPage() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [hospital, setHospital] = useState(FALLBACK_HOSPITAL);
+  const [opdDepartments, setOpdDepartments] = useState(FALLBACK_OPD_DEPARTMENTS);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchSingle("hospital").then((data) => {
+      if (isMounted && data) {
+        setHospital({ ...FALLBACK_HOSPITAL, ...data });
+      }
+    });
+    fetchList("hospital_service").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setOpdDepartments(
+          rows.map((r) => {
+            // description is stored as free text, e.g.
+            // "General medicine • OPD days: Mon–Sat" - split it back
+            // into focus / days for the existing table columns when
+            // possible, otherwise show it as-is under "focus".
+            const parts = String(r.description || "").split("•").map((p) => p.trim());
+            const focus = parts[0] || r.description || "";
+            const daysMatch = String(r.description || "").match(/OPD days:\s*(.+)$/i);
+            return {
+              dept: r.name,
+              focus,
+              days: daysMatch ? daysMatch[1] : "",
+            };
+          })
+        );
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const visibleItems = useMemo(
     () =>
@@ -275,7 +320,24 @@ export default function HospitalPage() {
       </div>
 
       {/* Page hero */}
-      
+      <section>
+        <div style={styles.container}>
+          <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", padding: "28px 0 8px" }}>
+            {hospital.image && (
+              <img
+                src={hospital.image}
+                alt={hospital.title}
+                style={{ width: 160, height: 160, objectFit: "cover", borderRadius: 12, flexShrink: 0 }}
+              />
+            )}
+            <div>
+              <h1 style={{ ...styles.h2, fontSize: 32, margin: "0 0 8px" }}>{hospital.title}</h1>
+              <p style={{ ...styles.para, maxWidth: 640 }}>{hospital.description}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stat strip */}
       <section>
         <div style={styles.container}>
@@ -317,7 +379,7 @@ export default function HospitalPage() {
                     <th style={styles.th}>OPD days</th>
                     <th style={styles.th}>Focus</th>
                   </tr>
-                  {OPD_DEPARTMENTS.map((row) => (
+                  {opdDepartments.map((row) => (
                     <tr key={row.dept}>
                       <td style={styles.td}>{row.dept}</td>
                       <td style={styles.td}>{row.days}</td>
@@ -340,9 +402,7 @@ export default function HospitalPage() {
             <div style={styles.pullCard}>
               <h4 style={styles.h4}>OPD timing</h4>
               <p style={styles.para}>
-                Monday – Saturday
-                <br />
-                9:00 AM – 2:00 PM
+                {hospital.opd_timings}
               </p>
             </div>
             </AnimatedContent>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Phone,
   Mail,
@@ -15,8 +15,34 @@ import {
   Bus,
   ArrowRight,
   MapPin,
+  Building2,
 } from "lucide-react";
 import AnimatedContent from "../Components/AnimatedContent";
+import { fetchList } from "../lib/cms";
+
+// Maps the free-text "icon" field stored in the CMS facility rows
+// (e.g. 'leaf', 'droplets') to an actual lucide-react icon component.
+// Unrecognised/blank values fall back to a generic building icon.
+const ICON_MAP = {
+  leaf: Leaf,
+  droplets: Droplets,
+  microscope: Microscope,
+  flask: FlaskConical,
+  flaskconical: FlaskConical,
+  book: BookOpen,
+  bookopen: BookOpen,
+  hostel: BedDouble,
+  beddouble: BedDouble,
+  dumbbell: Dumbbell,
+  sports: Dumbbell,
+  bus: Bus,
+  transport: Bus,
+};
+
+function iconFor(name) {
+  if (!name) return Building2;
+  return ICON_MAP[String(name).toLowerCase().replace(/\s+/g, "")] || Building2;
+}
 
 const COLORS = {
   navy: "#0F3557",
@@ -45,7 +71,7 @@ const NAV = [
   { label: "Contact" },
 ];
 
-const FACILITIES = [
+const FALLBACK_FACILITIES = [
   {
     icon: Leaf,
     title: "Herbal Garden",
@@ -101,6 +127,28 @@ function TridoshaMark({ size = 44 }) {
 export default function FacilitiesPage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [facilities, setFacilities] = useState(
+    FALLBACK_FACILITIES.map((f) => ({ icon: f.icon, title: f.title, text: f.text, image: null }))
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchList("facility").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setFacilities(
+          rows.map((r) => ({
+            icon: iconFor(r.icon),
+            title: r.title,
+            text: r.description,
+            image: r.image || null,
+          }))
+        );
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", color: COLORS.ink, background: COLORS.cream }}>
@@ -150,13 +198,12 @@ export default function FacilitiesPage() {
       {/* Facilities grid */}
       <section style={{ padding: "56px 20px" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
-          {FACILITIES.map(({ icon: Icon, title, text }, i) => (
+          {facilities.map(({ icon: Icon, title, text, image }, i) => (
             
-            <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out">
+            <AnimatedContent direction="vertical"   distance={200} duration={2} ease="power4.out" key={title}>
 
             
             <div
-              key={title}
               style={{
                 border: `1px solid ${COLORS.line}`,
                 borderRadius: 12,
@@ -165,6 +212,14 @@ export default function FacilitiesPage() {
                 borderTop: `3px solid ${i % 2 === 0 ? COLORS.navy : COLORS.orange}`,
               }}
               >
+
+              {image && (
+                <img
+                  src={image}
+                  alt={title}
+                  style={{ width: "100%", height: 140, objectFit: "cover", borderRadius: 8, marginBottom: 16 }}
+                />
+              )}
 
               <div
                 style={{
