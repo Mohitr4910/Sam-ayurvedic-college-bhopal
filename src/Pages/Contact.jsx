@@ -58,9 +58,11 @@ function PrimaryNav() {
 // unreachable.
 const FALLBACK_CONTACT = {
   address:
-    "Sam Global University | Private university in central India, Gram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh 462022",
-  phone: "(+91) 70247 70000",
-  email: "care@samayurveda.in",
+    "Village Agariya Chopra,Block-Sanchi, Dis-Raisen Pincode=-464551 Madhya Pradesh",
+  phone: "(+91) 80851-40009",
+  phone2: "(+91) 07067-220000",
+
+  email: "adm.samcet@gmail.com",
   office_hours: "Monday – Saturday, 9:00 AM – 5:00 PM\nHospital OPD: 9:00 AM – 2:00 PM",
   map_embed_url:
     "https://www.openstreetmap.org/export/embed.html?bbox=77.5186%2C23.2451%2C77.5386%2C23.2651&layer=mapnik&marker=23.255133561653512%2C77.5286225299004",
@@ -255,6 +257,7 @@ export default function ContactPage() {
               </svg>
               <h4>Phone</h4>
               <p><a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>{contact.phone}</a></p>
+              <p><a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>{contact.phone2}</a></p>
             </div>
            
             <div className="contact-card">

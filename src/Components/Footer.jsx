@@ -6,9 +6,10 @@ import { fetchSingle } from "../lib/cms";
 // a safety net if the CMS is unreachable.
 const FALLBACK_CONTACT = {
   address:
-    "Sam Global University\nPrivate university in central India,\nGram Adampur Chawni, Raisen Rd, Kolua Khurd, Bhopal, Madhya Pradesh\nPIN - 462022",
-  phone: "(+91) 70247 70000",
-  email: "care@samayurveda.in",
+    "Village Agariya Chopra,\nBlock-Sanchi, Dis-Raisen\nPincode=-464551\nMadhya Pradesh",
+  phone: "(+91) 80851-40009",
+  phone2: "(+91) 07067-220000",
+  email: "adm.samcet@gmail.com",
   facebook_url: "",
   instagram_url: "",
   youtube_url: "",
@@ -38,11 +39,14 @@ function Footer() {
               <h3>Important Links</h3>
 
               <a href="#">AICTE New Delhi</a>
-              <a href="#">NCISM</a>
-              <a href="#">MP Online</a>
+              <a href="#">RGPV Bhopal</a>
+              <a href="#">RGPV Diploma Bhopal</a>
+              <a href="#">BU Bhopal</a>
+              <a href="#">DTE MP Counselling</a>
               <a href="#">Fee Committee Bhopal</a>
+              <a href="#">Vyapam Bhopal</a>
+              <a href="#">MP Online</a>
               <a href="#">Anti Ragging Cell</a>
-              <a href="#">SAM Global University</a>
             </div>
 
             <div className="footer-column">
@@ -73,6 +77,7 @@ function Footer() {
               <h4>Phone & Email</h4>
 
               <p>{contact.phone}</p>
+              <p>{contact.phone2}</p>
 
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
 

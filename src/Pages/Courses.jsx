@@ -69,46 +69,46 @@ const TIMELINE = [
   },
 ];
 
-function TridoshaMark({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle className="c-vata" cx="24" cy="22" r="15" />
-      <circle className="c-pitta" cx="38" cy="22" r="15" />
-      <circle className="c-kapha" cx="31" cy="36" r="15" />
-    </svg>
-  );
-}
+// function TridoshaMark({ className = "" }) {
+//   return (
+//     <svg className={className} viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+//       <circle className="c-vata" cx="24" cy="22" r="15" />
+//       <circle className="c-pitta" cx="38" cy="22" r="15" />
+//       <circle className="c-kapha" cx="31" cy="36" r="15" />
+//     </svg>
+//   );
+// }
 
 /* Decorative botanical corner motif for the hero — stands in for a photo
    without borrowing imagery tied to another institution or brand. */
-function LeafMotif({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g fill="none" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M110 200 C 60 160, 40 100, 70 40 C 100 90, 100 150, 110 200 Z" fill="var(--green)" opacity="0.9" />
-        <path d="M110 200 C 150 165, 175 110, 150 45 C 120 95, 115 155, 110 200 Z" fill="var(--blue)" opacity="0.85" />
-        <path d="M110 200 C 130 150, 150 120, 195 105 C 175 145, 150 175, 110 200 Z" fill="var(--orange)" opacity="0.9" />
-        <path d="M110 30 L110 200" stroke="#fff" strokeOpacity="0.5" />
-      </g>
-      <circle cx="110" cy="200" r="7" fill="var(--green-deep)" />
-    </svg>
-  );
-}
+// function LeafMotif({ className = "" }) {
+//   return (
+//     <svg className={className} viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+//       <g fill="none" strokeWidth="2.5" strokeLinecap="round">
+//         <path d="M110 200 C 60 160, 40 100, 70 40 C 100 90, 100 150, 110 200 Z" fill="var(--green)" opacity="0.9" />
+//         <path d="M110 200 C 150 165, 175 110, 150 45 C 120 95, 115 155, 110 200 Z" fill="var(--blue)" opacity="0.85" />
+//         <path d="M110 200 C 130 150, 150 120, 195 105 C 175 145, 150 175, 110 200 Z" fill="var(--orange)" opacity="0.9" />
+//         <path d="M110 30 L110 200" stroke="#fff" strokeOpacity="0.5" />
+//       </g>
+//       <circle cx="110" cy="200" r="7" fill="var(--green-deep)" />
+//     </svg>
+//   );
+// }
 
 /* Small mortar & pestle icon, referencing classical Ayurvedic preparation
    (Bhaishajya Kalpana) — used as an illustrative anchor in the sidebar. */
-function MortarPestleIcon({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M14 34 C14 48, 24 56, 32 56 C40 56, 50 48, 50 34" fill="none" stroke="var(--orange)" strokeWidth="4" strokeLinecap="round" />
-      <ellipse cx="32" cy="34" rx="20" ry="6" fill="var(--orange-soft)" stroke="var(--orange)" strokeWidth="2.5" />
-      <rect x="36" y="8" width="6" height="26" rx="3" transform="rotate(18 39 21)" fill="var(--blue)" />
-      <circle cx="24" cy="30" r="2.4" fill="var(--green)" />
-      <circle cx="32" cy="27" r="2.4" fill="var(--green)" />
-      <circle cx="40" cy="30" r="2.4" fill="var(--green)" />
-    </svg>
-  );
-}
+// function MortarPestleIcon({ className = "" }) {
+//   return (
+//     <svg className={className} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+//       <path d="M14 34 C14 48, 24 56, 32 56 C40 56, 50 48, 50 34" fill="none" stroke="var(--orange)" strokeWidth="4" strokeLinecap="round" />
+//       <ellipse cx="32" cy="34" rx="20" ry="6" fill="var(--orange-soft)" stroke="var(--orange)" strokeWidth="2.5" />
+//       <rect x="36" y="8" width="6" height="26" rx="3" transform="rotate(18 39 21)" fill="var(--blue)" />
+//       <circle cx="24" cy="30" r="2.4" fill="var(--green)" />
+//       <circle cx="32" cy="27" r="2.4" fill="var(--green)" />
+//       <circle cx="40" cy="30" r="2.4" fill="var(--green)" />
+//     </svg>
+//   );
+// }
 
 function PrimaryNav() {
   return (
@@ -322,7 +322,7 @@ export default function CoursesPage() {
             <h1>BAMS</h1>
             <p>Bachelor of Ayurvedic Medicine and Surgery — a five-and-a-half-year programme combining classical study, basic sciences and supervised clinical practice.</p>
           </div>
-          <LeafMotif className="hero-art" />
+          {/* <LeafMotif className="hero-art" /> */}
         </div>
       </section>
 
@@ -384,7 +384,7 @@ export default function CoursesPage() {
           </div>
           <div>
             <div className="icon-card">
-              <MortarPestleIcon />
+              {/* <MortarPestleIcon /> */}
               <div>
                 <h4>Classical foundation</h4>
                 <p>Study of Samhita texts and Bhaishajya Kalpana runs alongside modern basic sciences from year one.</p>

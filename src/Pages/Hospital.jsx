@@ -2,6 +2,24 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import AnimatedContent from "../Components/AnimatedContent";
 import { fetchSingle, fetchList } from "../lib/cms";
 
+/* Real campus/hospital images bundled by Vite — used instead of the
+   old "images/hospital/xyz.jpg" string paths, which pointed at files
+   that don't exist in this project and rendered as empty/broken
+   image boxes. */
+import hgImg1 from "../assets/MeetUsHere.jpg";
+import hgImg2 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM (1).jpeg";
+import hgImg3 from "../assets/sam-global-university-bhopal-366328.webp";
+import hgImg4 from "../assets/sam-global-university-bhopal-366330.webp";
+import hgImg5 from "../assets/sam-global-university-bhopal-366331.webp";
+import hgImg6 from "../assets/sam-global-university-bhopal-366333.webp";
+import hgImg7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.59-1.jpeg";
+import hgImg8 from "../assets/one-480x340.jpg";
+import hgImg9 from "../assets/hero.png";
+import hgImg10 from "../assets/Culture-Events-6-768x512.jpg";
+import hgImg11 from "../assets/Events-And-Workshops-3-768x512.jpg";
+import hgImg12 from "../assets/Events-And-Workshops-5-768x512.jpg";
+import hospitalHeroFallback from "../assets/bg.jpg";
+
 /* ---------------------------------------------------------
    Data
 --------------------------------------------------------- */
@@ -29,18 +47,9 @@ const NAV_LINKS = [
 
 const STATS = [
   { num: "OPD + IPD", lbl: "Care model" },
-  { num: "14", lbl: "Clinical departments" },
-  { num: "6 days", lbl: "OPD per week" },
   { num: "24×7", lbl: "Emergency & IPD" },
 ];
 
-const FALLBACK_OPD_DEPARTMENTS = [
-  { dept: "Kaya Chikitsa", days: "Mon–Sat", focus: "General medicine" },
-  { dept: "Panchakarma", days: "Mon–Sat", focus: "Purification therapies" },
-  { dept: "Shalya Tantra", days: "Mon, Wed, Fri", focus: "Ayurvedic surgery" },
-  { dept: "Shalakya Tantra", days: "Tue, Thu, Sat", focus: "Eye, ENT & head" },
-  { dept: "Prasuti & Stri Roga", days: "Mon–Sat", focus: "Women's health" },
-];
 
 // Fallback hospital page content, shown until the CMS responds or if
 // it is unreachable.
@@ -52,6 +61,16 @@ const FALLBACK_HOSPITAL = {
   image: "",
 };
 
+const BED_DISTRIBUTION = [
+  { dept: "Shalakya Department", count: "08" },
+  { dept: "Panchakarma Department", count: "20" },
+  { dept: "Shalaya Department", count: "17" },
+  { dept: "Kaya Chikitsa Department", count: "30" },
+  { dept: "Stri Prasuti Department", count: "15" },
+  { dept: "Balrog Department", count: "10" },
+];
+const TOTAL_BEDS = "100";
+
 const FILTERS = [
   { key: "all", label: "All" },
   { key: "opd", label: "OPD" },
@@ -62,78 +81,78 @@ const FILTERS = [
 
 const GALLERY_ITEMS = [
   {
-    src: "images/hospital/opd-reception.jpg",
+    src: hgImg1,
     alt: "OPD reception and registration counter",
     cap: "OPD reception & registration",
     cat: "opd",
     size: "big",
   },
   {
-    src: "images/hospital/kaya-chikitsa-opd.jpg",
+    src: hgImg2,
     alt: "Kaya Chikitsa OPD consultation room",
     cap: "Kaya Chikitsa OPD",
     cat: "opd",
   },
   {
-    src: "images/hospital/panchakarma-table.jpg",
+    src: hgImg3,
     alt: "Panchakarma therapy table set-up",
     cap: "Panchakarma theatre",
     cat: "panchakarma",
     size: "tall",
   },
   {
-    src: "images/hospital/ipd-ward.jpg",
+    src: hgImg4,
     alt: "General inpatient ward",
     cap: "IPD ward",
     cat: "ipd",
   },
   {
-    src: "images/hospital/clinical-rounds.jpg",
+    src: hgImg5,
     alt: "Interns on morning clinical rounds",
     cap: "Clinical rounds",
     cat: "students",
     size: "wide",
   },
   {
-    src: "images/hospital/snehana-therapy.jpg",
+    src: hgImg6,
     alt: "Snehana oil therapy in progress",
     cap: "Snehana therapy",
     cat: "panchakarma",
   },
   {
-    src: "images/hospital/shalakya-opd.jpg",
+    src: hgImg7,
     alt: "Shalakya Tantra eye and ENT OPD",
     cap: "Shalakya OPD",
     cat: "opd",
   },
   {
-    src: "images/hospital/bedside-teaching.jpg",
+    src: hgImg8,
     alt: "Faculty guiding students at patient bedside",
     cap: "Bedside teaching",
     cat: "students",
     size: "tall",
   },
   {
-    src: "images/hospital/nursing-station.jpg",
+    src: hgImg9,
     alt: "Nursing station in the IPD block",
     cap: "Nursing station",
     cat: "ipd",
   },
   {
-    src: "images/hospital/pharmacy-dispensing.jpg",
+    src: hgImg10,
     alt: "Hospital pharmacy dispensing classical formulations",
     cap: "In-house pharmacy",
     cat: "panchakarma",
     size: "wide",
   },
   {
-    src: "images/hospital/case-taking.jpg",
+    src: hgImg11,
     alt: "Case-taking session in Prasuti and Stri Roga OPD",
     cap: "Case-taking session",
     cat: "students",
   },
   {
-    src: "images/hospital/opd-waiting-area.jpg",
+    src: hgImg12,
     alt: "Patient waiting area outside the OPD block",
     cap: "OPD waiting area",
     cat: "opd",
@@ -189,7 +208,6 @@ export default function HospitalPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [hospital, setHospital] = useState(FALLBACK_HOSPITAL);
-  const [opdDepartments, setOpdDepartments] = useState(FALLBACK_OPD_DEPARTMENTS);
 
   useEffect(() => {
     let isMounted = true;
@@ -283,6 +301,9 @@ export default function HospitalPage() {
         .hg-item-wide { grid-column: span 2; }
         .hg-item-tall { grid-row: span 2; }
 
+        .bed-card { transition: transform .25s ease, box-shadow .25s ease; }
+        .bed-card:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0,0,0,.09); }
+
         @media (max-width: 900px) {
           .hg-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
           .content-grid { grid-template-columns: 1fr !important; }
@@ -320,19 +341,17 @@ export default function HospitalPage() {
       </div>
 
       {/* Page hero */}
-      <section>
+      <section style={styles.heroSection}>
         <div style={styles.container}>
-          <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", padding: "28px 0 8px" }}>
-            {hospital.image && (
-              <img
-                src={hospital.image}
-                alt={hospital.title}
-                style={{ width: 160, height: 160, objectFit: "cover", borderRadius: 12, flexShrink: 0 }}
-              />
-            )}
+          <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", padding: "28px 0" }}>
+            <img
+              src={hospital.image || hospitalHeroFallback}
+              alt={hospital.title}
+              style={{ width: 160, height: 160, objectFit: "cover", borderRadius: 12, flexShrink: 0 }}
+            />
             <div>
-              <h1 style={{ ...styles.h2, fontSize: 32, margin: "0 0 8px" }}>{hospital.title}</h1>
-              <p style={{ ...styles.para, maxWidth: 640 }}>{hospital.description}</p>
+              <h1 style={{ ...styles.h2, fontSize: 32, margin: "0 0 8px", color: "#fff" }}>{hospital.title}</h1>
+              <p style={{ ...styles.para, maxWidth: 640, color: "#fff" }}>{hospital.description}</p>
             </div>
           </div>
         </div>
@@ -371,7 +390,7 @@ export default function HospitalPage() {
               reviewed before it reaches a patient.
             </p>
             <h3 style={styles.h3}>Departments seeing OPD patients</h3>
-            <div style={styles.tableWrap}>
+            {/* <div style={styles.tableWrap}>
               <table style={styles.table}>
                 <tbody>
                   <tr>
@@ -388,7 +407,7 @@ export default function HospitalPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </div> */}
             <p style={styles.formNote}>
               Full department-wise timing is displayed at the hospital
               reception and revised each academic term.
@@ -432,9 +451,32 @@ export default function HospitalPage() {
             </AnimatedContent>
           </div>
         </div>
-              <h4 style={styles.h4}>Emergency contact</h4>
       </section>
 
+      {/* Bed distribution */}
+      <section style={styles.bedSection}>
+        <div style={styles.container}>
+          <div style={styles.eyebrow}>Bed capacity</div>
+          <h2 style={{ ...styles.h2, marginBottom: 6 }}>Our Hospital's Bed Distribution</h2>
+          <p style={styles.hgHeadPara}>
+            Department-wise inpatient bed capacity across the hospital.
+          </p>
+          <div style={styles.bedGrid}>
+            {BED_DISTRIBUTION.map((b) => (
+              <div key={b.dept} className="bed-card" style={styles.bedItem}>
+                <span style={styles.bedCount}>{b.count}</span>
+                <span style={styles.bedCountLbl}>Beds</span>
+                <span style={styles.bedDept}>{b.dept}</span>
+              </div>
+            ))}
+          </div>
+          <div style={styles.bedTotal}>Total Beds — {TOTAL_BEDS}</div>
+        </div>
+      </section>
+
+<br />
+<br />
+<br />
       {/* ===================== HOSPITAL GALLERY ===================== */}
       <section style={styles.hgSection}>
         <div style={styles.container}>
@@ -625,6 +667,7 @@ const styles = {
   mobileCloseRow: { display: "flex", justifyContent: "flex-end", marginBottom: 20 },
 
   pageHero: { background: COLORS.cream, padding: "48px 0" },
+  heroSection: { background: COLORS.ink },
   eyebrow: { fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600, marginBottom: 6 },
   h1: { fontSize: "clamp(28px,4vw,42px)", margin: "0 0 10px" },
   heroPara: { color: COLORS.muted, maxWidth: 560, margin: 0 },
@@ -655,6 +698,38 @@ const styles = {
   th: { textAlign: "left", padding: "8px 6px", borderBottom: `2px solid ${COLORS.ink}` },
   td: { padding: "8px 6px", borderBottom: `1px solid ${COLORS.border}` },
   formNote: { fontSize: 12, color: COLORS.muted, marginTop: 12 },
+
+  bedSection: { padding: "48px 0 8px" },
+  bedGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px,1fr))",
+    gap: 18,
+    marginTop: 24,
+  },
+  bedItem: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+    background: "#fff",
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: 12,
+    padding: "22px 20px",
+    boxShadow: "0 1px 3px rgba(0,0,0,.05)",
+  },
+  bedCount: { color: COLORS.gold, fontSize: 32, fontWeight: 700, lineHeight: 1 },
+  bedCountLbl: { color: COLORS.muted, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 },
+  bedDept: { color: COLORS.ink, fontSize: 14, fontWeight: 600 },
+  bedTotal: {
+    marginTop: 22,
+    textAlign: "center",
+    background: COLORS.ink,
+    color: "#fff",
+    borderRadius: 10,
+    padding: "14px 20px",
+    fontSize: 15,
+    fontWeight: 600,
+    letterSpacing: "0.02em",
+  },
 
   pullCard: {
     background: COLORS.cream,

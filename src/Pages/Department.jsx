@@ -26,20 +26,20 @@ const NAV_ITEMS = [
 const TONES = ["green", "blue", "orange"];
 
 const FALLBACK_DEPARTMENTS = [
-  { name: "Kaya Chikitsa", desc: "General medicine — internal disorders, chronic disease management and pulse-based diagnosis." },
-  { name: "Shalya Tantra", desc: "Ayurvedic surgery, wound care, ksharsutra therapy and pre/post-operative management." },
-  { name: "Panchakarma", desc: "The five classical purification therapies — Vamana, Virechana, Basti, Nasya and Raktamokshana." },
-  { name: "Shalakya Tantra", desc: "Diseases of the eye, ear, nose, throat and head; including Ayurvedic ophthalmology." },
-  { name: "Prasuti Tantra & Stri Roga", desc: "Obstetrics, gynaecology and women's health across the reproductive lifecycle." },
-  { name: "Dravyaguna Vigyan", desc: "Study of medicinal plants — identification, properties and therapeutic action." },
-  { name: "Rasashastra & Bhaishajya Kalpana", desc: "Ayurvedic pharmaceutics, mineral processing and classical drug formulation." },
-  { name: "Agad Tantra", desc: "Toxicology, forensic medicine and medical jurisprudence in Ayurvedic practice." },
-  { name: "Samhita & Siddhanta", desc: "Foundational classical texts — Charaka, Sushruta and Ashtanga Hridaya." },
-  { name: "Kriya Sharir", desc: "Human physiology explained through Tridosha, Sapta Dhatu and Agni theory." },
   { name: "Rachana Sharir", desc: "Human anatomy — Ayurvedic and applied, through dissection and structured study." },
+  { name: "Kayachikitsa", desc: "General medicine — internal disorders, chronic disease management and pulse-based diagnosis." },
+  { name: "Prasuti & Stri Roga", desc: "Obstetrics, gynaecology and women's health across the reproductive lifecycle." },
+  { name: "Ayurved Samhita & Siddhant", desc: "Foundational classical texts — Charaka, Sushruta and Ashtanga Hridaya." },
+  { name: "Agad Tantra avum Vidhi Vaidyaka", desc: "Toxicology, forensic medicine and medical jurisprudence in Ayurvedic practice." },
+  { name: "Kriya Sharir", desc: "Human physiology explained through Tridosha, Sapta Dhatu and Agni theory." },
+  { name: "Panchakarma", desc: "The five classical purification therapies — Vamana, Virechana, Basti, Nasya and Raktamokshana." },
+  { name: "Kaumarbhritya-Bala Roga", desc: "Paediatrics — child health, growth and Ayurvedic care from infancy through adolescence." },
+  { name: "Rog Nidan avum Vikriti Vigyan", desc: "Diagnostic methods, pathology and clinical examination technique." },
+  { name: "Rasa Shastra & Bhaisajya Kalpana", desc: "Ayurvedic pharmaceutics, mineral processing and classical drug formulation." },
+  { name: "Dravyaguna Vigyana", desc: "Study of medicinal plants — identification, properties and therapeutic action." },
+  { name: "Shalakya Tantra", desc: "Diseases of the eye, ear, nose, throat and head; including Ayurvedic ophthalmology." },
+  { name: "Shalyatantra + (Ksharsutra Lab.)", desc: "Ayurvedic surgery, wound care, ksharsutra therapy and pre/post-operative management." },
   { name: "Swasthavritta & Yoga", desc: "Preventive medicine, public health, diet science and yogic practice." },
-  { name: "Roga Nidan & Vikriti Vigyan", desc: "Diagnostic methods, pathology and clinical examination technique." },
-  { name: "Sanskrit & Ithihas", desc: "Classical Sanskrit language and the history of Ayurvedic science." },
 ].map((d, i) => ({ ...d, tone: TONES[i % TONES.length] }));
 
 function DeptIcon({ className = "" }) {
@@ -63,19 +63,19 @@ function TridoshaMark({ className = "" }) {
 
 /* Decorative botanical corner motif — same signature element used on the
    Courses page, so the two pages read as one identity. */
-function LeafMotif({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g fill="none" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M110 200 C 60 160, 40 100, 70 40 C 100 90, 100 150, 110 200 Z" fill="var(--green)" opacity="0.9" />
-        <path d="M110 200 C 150 165, 175 110, 150 45 C 120 95, 115 155, 110 200 Z" fill="var(--blue)" opacity="0.85" />
-        <path d="M110 200 C 130 150, 150 120, 195 105 C 175 145, 150 175, 110 200 Z" fill="var(--orange)" opacity="0.9" />
-        <path d="M110 30 L110 200" stroke="#fff" strokeOpacity="0.5" />
-      </g>
-      <circle cx="110" cy="200" r="7" fill="var(--green-deep)" />
-    </svg>
-  );
-}
+// function LeafMotif({ className = "" }) {
+//   return (
+//     <svg className={className} viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+//       <g fill="none" strokeWidth="2.5" strokeLinecap="round">
+//         <path d="M110 200 C 60 160, 40 100, 70 40 C 100 90, 100 150, 110 200 Z" fill="var(--green)" opacity="0.9" />
+//         <path d="M110 200 C 150 165, 175 110, 150 45 C 120 95, 115 155, 110 200 Z" fill="var(--blue)" opacity="0.85" />
+//         <path d="M110 200 C 130 150, 150 120, 195 105 C 175 145, 150 175, 110 200 Z" fill="var(--orange)" opacity="0.9" />
+//         <path d="M110 30 L110 200" stroke="#fff" strokeOpacity="0.5" />
+//       </g>
+//       <circle cx="110" cy="200" r="7" fill="var(--green-deep)" />
+//     </svg>
+//   );
+// }
 
 /* Wheel motif for the CTA band — eight spokes nod to Ashtanga Ayurveda,
    the eight classical branches referenced in the hero copy. */
@@ -303,7 +303,7 @@ export default function DepartmentPage() {
             <h1>Departments</h1>
             <p>Fourteen departments covering the eight classical branches of Ayurveda and its foundational sciences, each led by qualified faculty.</p>
           </div>
-          <LeafMotif className="hero-art" />
+          {/* <LeafMotif className="hero-art" /> */}
         </div>
       </section>
 
@@ -342,8 +342,8 @@ export default function DepartmentPage() {
               <p>The full BAMS curriculum breaks this down professional by professional.</p>
             </div>
             <div className="cta-actions">
-              <AshtangaWheel className="wheel" />
-              <a className="btn btn-primary" href="courses.html">View Curriculum</a>
+              {/* <AshtangaWheel className="wheel" /> */}
+              <a className="btn btn-primary" href="">View Curriculum</a>
             </div>
           </div>
         </div>

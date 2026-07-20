@@ -31,10 +31,11 @@ import gallaryimg6 from "../assets/Events-And-Workshops-5-768x512.jpg";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 
 import doctorImg from "../assets/bg.jpg";
@@ -59,6 +60,13 @@ const FALLBACK_GALLERY_IMAGES = [
 
 ];
 
+
+const ATTENDANCE = [
+  "Students shall undergo a study period of four and a half years, plus one year of internship, from the date of admission.",
+  "Students must attend at least ninety percent (90%) of total lectures, practicals and clinical/tutorial classes to become eligible for University Examinations.",
+  "Students shall attend the hospital and other duties as may be assigned to them during the course of study.",
+  "Students shall attend special lectures, demonstrations, seminars, study tours and other activities arranged by the College.",
+];
 
 
 import leader1 from "../assets/Leadership_chairman-300x300.jpg";
@@ -169,6 +177,11 @@ function Home() {
       }
     });
 
+
+
+
+ 
+
     return () => {
       isMounted = false;
     };
@@ -178,12 +191,25 @@ function Home() {
     <>
 
       <section className="hero-slider">
-        <div className="slides">
-          <img src={hero1} alt="Hero 1" />
-          <img src={hero2} alt="Hero 2" />
-          <img src={hero3} alt="Hero 3" />
-          <img src={hero4} alt="Hero 4" />
-        </div>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          navigation
+          pagination={{ clickable: true }}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          speed={800}
+          className="heroSwiper"
+        >
+          {[hero1, hero2, hero3, hero4].map((src, index) => (
+            <SwiperSlide key={index}>
+              <img src={src} alt={`Hero ${index + 1}`} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       <section class="school-banner">
@@ -408,6 +434,51 @@ function Home() {
     </section>
 
 
+ <section className="programmes-section">
+      <div className="programmes-title">
+        <h2>Programmes Offered</h2>
+        <p>BAMS — Bachelor of Ayurvedic Medicine and Surgery</p>
+      </div>
+ 
+      <div className="programmes-grid">
+ 
+        {/* Left: Programme intro + seats */}
+        <div className="programme-card">
+          <h3>Ayurvedacharya (BAMS)</h3>
+          <p>
+            We offer a Bachelor degree in Ayurveda called BAMS
+            (Ayurvedacharya – Bachelor of Ayurvedic Medicine and Surgery)
+            from the academic year 2017–18 onwards.
+          </p>
+          <div className="seats-badge">
+            <span className="num">100</span>
+            <span className="lbl">
+              seats for
+              <br />
+              current session
+            </span>
+          </div>
+        </div>
+ 
+        {/* Right: Period of study & attendance */}
+        <div className="attendance-card">
+          <h3>Period of Study &amp; Attendance</h3>
+          <ul className="attendance-list">
+            {ATTENDANCE.map((point, index) => (
+              <li key={index}>
+                <span className="step-num">{index + 1}</span>
+                <p>{point}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+ 
+      </div>
+    </section>
+
+    
+
+
 
 <section className="gallery-section">
 
@@ -495,7 +566,6 @@ function Home() {
 
   </div>
 </section>
-
     </>
   );
 }

@@ -40,17 +40,31 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
   localStorage.getItem("adminEmail") !== null
 );
 
-  const [disclosures, setDisclosures] = useState([]);
+  // STATIC (temporary) list of Mandatory Disclosure documents.
+  // Add each new PDF here: put the file in `public/docs/` and add
+  // a row below with a title + the path to that file.
+  const staticDisclosures = [
+    { id: 1, title: "Batch 2022-23", file: "/docs/2022-23.pdf" },
+    { id: 2, title: "Batch 2023-24", file: "/docs/2023-24.pdf" },
+    { id: 3, title: "Batch 2024-25", file: "/docs/2024-25.pdf" },
+    { id: 4, title: "Batch 2025-26", file: "/docs/2025-26.pdf" },
+    { id: 5, title: "Hospital 2026 June", file: "/docs/Hospital 2026 June.pdf" },
+    { id: 6, title: "Teaching 2026 april_merged", file: "/docs/Teaching 2026 april_merged (1).pdf" },
+    { id: 7, title: "NON Teaching till june 2026", file: "/docs/NON Teaching till june 2026.pdf" },
+  ];
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/index.php?type=mandatory_disclosure`)
-      .then((res) => setDisclosures(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => {
-        console.error("Failed to load Mandatory Disclosure list:", err);
-        setDisclosures([]);
-      });
-  }, []);
+  const [disclosures, setDisclosures] = useState(staticDisclosures);
+
+  // --- CMS API version (commented out for now, switch back later) ---
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API_BASE}/api/index.php?type=mandatory_disclosure`)
+  //     .then((res) => setDisclosures(Array.isArray(res.data) ? res.data : []))
+  //     .catch((err) => {
+  //       console.error("Failed to load Mandatory Disclosure list:", err);
+  //       setDisclosures([]);
+  //     });
+  // }, []);
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -68,22 +82,26 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
 
                         <span>
                             <FaPhoneAlt />
-                            (+91) 70247 70000
+                           (+91) 80851-40009
                         </span>
 
                         <span>
                             <FaEnvelope />
-                            care@samayurveda.in
+                           adm.samcet@gmail.com
                         </span>
 
                     </div>
 
                     <div className="right">
 
-                        <a href="#">ADMISSION</a>
+                        {/* <a href="#">ADMISSION</a>
                         <a href="#">PLACEMENTS</a>
-                        <a href="#">GALLERY</a>
-                        <a href="#">CONTACT</a>
+                        <a href="#">GALLERY</a> */}
+                       <NavLink to="">ADMISSION</NavLink>
+                       <NavLink to="">PLACEMENTS</NavLink>
+                       <NavLink to="">GALLERY</NavLink>
+                       <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
+
 
                     </div>
 
@@ -132,7 +150,7 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
           <li><NavLink to="/courses" onClick={() => setMenuOpen(false)}>Courses</NavLink></li>
           <li><NavLink to="/hospital" onClick={() => setMenuOpen(false)}>Hospital</NavLink></li>
           <li><NavLink to="/facilities" onClick={() => setMenuOpen(false)}>Facilities</NavLink></li>
-          <li><NavLink to="/academic" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
+          <li><NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
          {disclosures.length > -1 && (
          <li className="dropdown">
   <span className="dropdown-title">

@@ -186,7 +186,7 @@ export default function FacilitiesPage() {
           <div style={{ display: "inline-block", background: COLORS.orangeSoft, color: COLORS.orangeDeep, fontSize: 12.5, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", padding: "5px 12px", borderRadius: 20, marginBottom: 16 }}>
             Campus infrastructure
           </div>
-          <h1 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 600, color: COLORS.navy, margin: "0 0 14px", maxWidth: 640 }}>
+          <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 600, color: COLORS.navy, margin: "0 0 14px", maxWidth: 640 }}>
             Facilities
           </h1>
           <p style={{ fontSize: 16.5, color: COLORS.slate, maxWidth: 560, lineHeight: 1.6, margin: 0 }}>

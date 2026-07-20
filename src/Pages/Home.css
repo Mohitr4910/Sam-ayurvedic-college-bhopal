@@ -391,63 +391,88 @@ body{
 
 
 
-.slider-section {
+.hero-slider {
     width: 100%;
-    height: 600px;
-    overflow: hidden;
     position: relative;
-    top: -120px;
 }
 
-.slider {
+.hero-slider .heroSwiper {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: 500px;
 }
 
-.slides {
-    display: flex;
-    width: calc(100% * 8);
-    height: 100%;
-    animation: slide 10s linear infinite;
-}
-
-.slides img {
-    width: 100vw;
+.hero-slider .heroSwiper .swiper-slide img {
+    width: 100%;
     height: 500px;
     object-fit: cover;
-    flex-shrink: 0;
+    display: block;
 }
-@keyframes slide {
-    /* Image 1 */
-    0%, 20% {
-        transform: translateX(0);
-    }
 
-    /* Image 2 */
-    25%, 45% {
-        transform: translateX(-100vw);
-    }
+/* Arrows */
+.hero-slider .swiper-button-prev,
+.hero-slider .swiper-button-next {
+    width: 46px;
+    height: 46px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    color: #fff;
+    transition: background .25s ease;
+}
 
-    /* Image 3 */
-    50%, 70% {
-        transform: translateX(-200vw);
-    }
+/* .hero-slider .swiper-button-prev:hover,
+.hero-slider .swiper-button-next:hover {
+    background: #c58c08;
+} */
 
-    /* Image 4 */
-    75%, 95% {
-        transform: translateX(-300vw);
-    }
+.hero-slider .swiper-button-prev::after,
+.hero-slider .swiper-button-next::after {
+    font-size: 18px;
+    font-weight: 700;
+}
 
-    /* Back to first */
-    100% {
-        transform: translateX(0);
+/* Dots */
+.hero-slider .swiper-pagination-bullet {
+    width: 11px;
+    height: 11px;
+    background: #fff;
+    opacity: .6;
+}
+
+.hero-slider .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #c58c08;
+}
+
+@media (max-width: 768px) {
+    .hero-slider .heroSwiper,
+    .hero-slider .heroSwiper .swiper-slide img {
+        height: 420px;
     }
 }
-/* Pause on Hover */
 
-.slider:hover .slides {
-    animation-play-state: paused;
+@media (max-width: 576px) {
+    .hero-slider .heroSwiper,
+    .hero-slider .heroSwiper .swiper-slide img {
+        height: 260px;
+    }
+
+    .hero-slider .swiper-button-prev,
+    .hero-slider .swiper-button-next {
+        width: 34px;
+        height: 34px;
+    }
+
+    .hero-slider .swiper-button-prev::after,
+    .hero-slider .swiper-button-next::after {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-slider .heroSwiper,
+    .hero-slider .heroSwiper .swiper-slide img {
+        height: 220px;
+    }
 }
 
 
@@ -1866,4 +1891,309 @@ body{
     aspect-ratio:16/9;
     display:block;
     border:none;
+}
+/* =======================
+   HOME — CLOSING CTA SECTION
+======================= */
+
+.home-cta-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #041e7f 0%, #2f317f 100%);
+}
+
+.home-cta-inner {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.home-cta-tag {
+    display: inline-block;
+    color: #c58c08;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.home-cta-left h2 {
+    color: #fff;
+    font-size: 34px;
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.home-cta-left p {
+    color: #dfe3f5;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 26px;
+}
+
+.home-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 34px;
+}
+
+.home-cta-btn {
+    display: inline-block;
+    padding: 13px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.home-cta-btn.primary {
+    background: #c58c08;
+    color: #fff;
+}
+
+.home-cta-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(197,140,8,.35);
+}
+
+.home-cta-btn.secondary {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,.5);
+}
+
+.home-cta-btn.secondary:hover {
+    background: rgba(255,255,255,.12);
+    transform: translateY(-3px);
+}
+
+.home-cta-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.home-cta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.home-cta-label {
+    color: #c58c08;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.home-cta-item a,
+.home-cta-item span {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    max-width: 260px;
+}
+
+.home-cta-item a:hover {
+    color: #c58c08;
+}
+
+.home-cta-right {
+    width: 100%;
+}
+
+.home-cta-map {
+    width: 100%;
+    height: 320px;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0,0,0,.3);
+}
+
+@media (max-width: 900px) {
+    .home-cta-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .home-cta-map {
+        height: 260px;
+    }
+}
+
+@media (max-width: 576px) {
+    .home-cta-section {
+        padding: 56px 0;
+    }
+
+    .home-cta-left h2 {
+        font-size: 26px;
+    }
+}
+
+
+/* =======================
+   PROGRAMMES OFFERED SECTION
+======================= */
+
+.programmes-section {
+    padding: 80px 20px;
+    background: #fbf9f4;
+}
+
+.programmes-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.programmes-title h2 {
+    display: inline-block;
+    background: #86d9e0;
+    color: #2f317f;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    padding: 10px 35px;
+    border-radius: 10px;
+}
+
+.programmes-title p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.programmes-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Left card — course intro + seats */
+.programme-card {
+    background: #041e7f;
+    color: #fff;
+    border-radius: 18px;
+    padding: 36px 32px;
+    box-shadow: 0 10px 25px rgba(4, 30, 127, 0.18);
+}
+
+.programme-card h3 {
+    font-size: 22px;
+    margin-bottom: 14px;
+    color: #c58c08;
+}
+
+.programme-card p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #e4e7fa;
+    margin-bottom: 22px;
+}
+
+.seats-badge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    padding: 14px 20px;
+}
+
+.seats-badge .num {
+    font-size: 34px;
+    font-weight: 700;
+    color: #c58c08;
+    line-height: 1;
+}
+
+.seats-badge .lbl {
+    font-size: 13px;
+    color: #dfe3f5;
+}
+
+/* Right card — period of study & attendance */
+.attendance-card {
+    background: #fff;
+    border: 1px solid #eadfc9;
+    border-radius: 18px;
+    padding: 36px 32px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.attendance-card h3 {
+    font-size: 20px;
+    color: #041e7f;
+    margin-bottom: 20px;
+}
+
+.attendance-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.attendance-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.attendance-list .step-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #c58c08;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.attendance-list p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #3f3a34;
+    margin: 0;
+}
+
+/* =======================
+   RESPONSIVE BREAKPOINTS
+======================= */
+
+@media (max-width: 900px) {
+    .programmes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .programmes-section {
+        padding: 56px 16px;
+    }
+
+    .programme-card,
+    .attendance-card {
+        padding: 26px 22px;
+    }
+
+    .seats-badge .num {
+        font-size: 28px;
+    }
 }
