@@ -229,6 +229,43 @@ body {
 ========================== */
 @media (max-width:768px){
 
+
+  .dropdown-menu{
+    position: static;
+    transform: none;
+    width: 100%;
+    max-height: none;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    padding: 0;
+}
+
+.dropdown.open .dropdown-menu{
+    display: block;
+}
+
+.dropdown-menu::before{
+    display: none;
+}
+
+.dropdown-menu li a{
+    color: white;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu li a:hover{
+    background: #f5f5f5;
+    color: #063a91;
+}
+
+.dropdown-title{
+    color: #041e7d;
+}
   .menu-btn{
     display:block;
     font-size:28px;
@@ -365,7 +402,6 @@ body {
   max-height: 520px;
   overflow-y: auto;
 
-  background: #363d64;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
 
@@ -396,33 +432,31 @@ body {
   border-right: 10px solid transparent;
   border-bottom: 10px solid #9d1f32;
 }
-
-/* Hover Open */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
+.dropdown-menu{
+    background:#fff;
 }
 
-/* List */
+.dropdown:hover .dropdown-menu{
+    opacity:1;
+    visibility:visible;
+    background:#fff;
+}
+
+.dropdown-menu li a{
+    color:#041e7d !important;
+    background:#fff;
+}
+
+.dropdown-menu li a:hover{
+    background:#f3f3f3;
+    color:#063a91 !important;
+}
+
 .dropdown-menu li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-.dropdown-menu li a {
-  display: block;
-  padding: 8px 20px;
-  margin: 0;
-  color: #fff;
-  text-decoration: none;
-  font-size: 15px;
-  line-height: 1.2;
-  white-space: normal;
-  word-break: break-word;
-  transition: .25s;
-}
-
 /* Agar li ke andar a ki jagah p / span / div ho, unka bhi
    default browser margin hata do — ye asli gap ki wajah ho sakti hai */
 .dropdown-menu li * {
@@ -526,6 +560,7 @@ body {
     width: 100%;
     min-width: 650px;
     border-collapse: collapse;
+    color: white;
   }
 
   .table-responsive {
@@ -554,6 +589,10 @@ body {
     font-size: 22px;
     text-align: center;
   }
+}
+
+.dropdown-menu li a {
+  color: white;
 }
 
 @media (max-width: 480px) {
