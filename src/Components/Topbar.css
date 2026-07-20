@@ -309,11 +309,11 @@ body {
 .navbar{
     position:relative;
     top:-100px;
-    left:135px;
+    left:60px;
     width:100%;
-       background: rgba(255, 255, 255, 0.8);
+       background:white;
     border-radius:0;
-    padding:20px 0;
+    padding:20px 50px;
     display:none;
 }
 
