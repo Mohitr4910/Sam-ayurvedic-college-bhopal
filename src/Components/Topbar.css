@@ -345,7 +345,8 @@ body {
   display: block;
   padding: 8px 20px;
   margin: 0;
-  color: #fff;
+      color:white;
+
   text-decoration: none;
   font-size: 15px;
   line-height: 1.2;
@@ -497,6 +498,79 @@ body {
 
   .add-file button {
     width: 100%;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+
+
+  
+.dropdown-title {
+
+    color:#041e7d;
+      
+
+}
+
+  .mandatory-disclosure,
+  .mandatory-container {
+    width: 100%;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  .mandatory-disclosure table,
+  .mandatory-container table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mandatory-disclosure img,
+  .mandatory-container img,
+  .mandatory-disclosure iframe,
+  .mandatory-container iframe,
+  .mandatory-disclosure embed,
+  .mandatory-container embed,
+  .mandatory-disclosure object,
+  .mandatory-container object {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mandatory-disclosure h1,
+  .mandatory-disclosure h2,
+  .mandatory-container h1,
+  .mandatory-container h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .mandatory-disclosure,
+  .mandatory-container {
+    padding: 10px;
+  }
+
+  .mandatory-disclosure h1,
+  .mandatory-container h1 {
+    font-size: 20px;
+  }
+
+  .mandatory-disclosure table,
+  .mandatory-container table {
+    min-width: 550px;
   }
 }
 
