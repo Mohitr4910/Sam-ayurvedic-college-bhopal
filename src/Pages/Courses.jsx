@@ -414,7 +414,7 @@ export default function CoursesPage() {
   
             <div className="pull-card" style={{ marginTop: 18, borderLeftColor: "var(--orange)" }}>
               <h4>Ready to apply?</h4>
-              <p>Review the full process on the <a href="admission.html">Admission</a> page.</p>
+              <p>Review the full process on the <a>Admission</a> page.</p>
             </div>
 </AnimatedContent>
           </div>
