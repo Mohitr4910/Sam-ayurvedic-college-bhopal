@@ -272,38 +272,53 @@ body {
     cursor:pointer;
 }
 
+/* The navbar is wrapped by AnimatedContent, which applies a GSAP
+   scroll-triggered transform + visibility:hidden/opacity:0 that only
+   plays once, on scroll. That transform also creates a new positioning
+   context for the absolutely-positioned .navbar dropdown inside it,
+   so on mobile the menu could render off in the middle of the page and
+   stay invisible after tapping the hamburger. Neutralize it here so the
+   menu opens/closes purely off menuOpen state and positions against
+   .middle-header as intended. */
+.nav-animate-wrap{
+  transform:none !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+
 .middle-header .container{
-  height: 100px;
+  min-height: 90px;
+  height:auto;
+  padding: 10px 0;
     display:flex;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items:center;
     position:relative;
+    flex-direction: row;
 }
 
 .logo img{
-  position: relative;
-  right:180px;
-  bottom:20px;
-    height:100px;
+  height:70px;
+  width:auto;
 }
 
 .menu-btn{
-  position: relative;
-   bottom:100px;
-   left: 200px;
-    display:block;
-    z-index:1001;
+  display:block;
+  margin-left:auto;
+  z-index:1001;
 }
 
 .navbar{
-    position:relative;
-    top:-100px;
-    left:165px;
+    position:absolute;
+    top:100%;
+    left:0;
     width:100%;
-       background:white;
+    background:white;
     border-radius:0;
-    padding:20px 100px;
+    padding:15px 20px;
+    box-shadow: 0 8px 15px rgba(0,0,0,.15);
     display:none;
+    box-sizing: border-box;
 }
 
 .navbar.active{
@@ -314,6 +329,7 @@ body {
 
     flex-direction:column;
     gap:11px;
+    width:100%;
 }
 
 .navbar li{
@@ -331,45 +347,60 @@ body {
     color:#041e7d;
 }
 
+.dropdown-menu{
+    width:100%;
+    max-width:100%;
+}
+
+.top-header .container{
+  align-items:flex-start;
+  padding:12px 0;
+}
+
+.right{
+    flex-direction:column;
+    align-items:flex-start;
+    flex-wrap:nowrap;
+    gap:8px;
+    width:100%;
+}
+
+.right a{
+    font-size:13px;
+}
+
 }
 
 @media (max-width:480px){
 
-  .menu-btn{
-  position: relative;
-   bottom:100px;
-   left: 180px;
-    display:block;
-    z-index:1001;
-}
-
-.navbar{
-    position:relative;
-    top:-100px;
-    left:60px;
-    width:100%;
-       background:white;
-    border-radius:0;
-    padding:20px 50px;
-    display:none;
-}
-
   .logo img{
-    height:95px;
-    position: relative;
-    left:-140px
+    height:60px;
   }
 
   .left span{
-    font-size:13px;
+    font-size:12px;
+  }
+
+  .left{
+    gap:14px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .right{
+    gap:14px;
   }
 
   .right a{
-    font-size:13px;
+    font-size:12px;
   }
 
   .navbar li{
     font-size:15px;
+  }
+
+  .navbar{
+    padding:15px 10px;
   }
 
 }

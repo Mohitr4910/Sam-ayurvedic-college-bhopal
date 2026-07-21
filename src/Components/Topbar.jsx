@@ -43,15 +43,29 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
   // STATIC (temporary) list of Mandatory Disclosure documents.
   // Add each new PDF here: put the file in `public/docs/` and add
   // a row below with a title + the path to that file.
-  const staticDisclosures = [
-    { id: 1, title: "Batch 2022-23", file: "/docs/2022-23.pdf" },
-    { id: 2, title: "Batch 2023-24", file: "/docs/2023-24.pdf" },
-    { id: 3, title: "Batch 2024-25", file: "/docs/2024-25.pdf" },
-    { id: 4, title: "Batch 2025-26", file: "/docs/2025-26.pdf" },
-    { id: 5, title: "Hospital 2026 June", file: "/docs/Hospital 2026 June.pdf" },
-    { id: 6, title: "Teaching 2026 april_merged", file: "/docs/Teaching 2026 april_merged (1).pdf" },
-    { id: 7, title: "NON Teaching till june 2026", file: "/docs/NON Teaching till june 2026.pdf" },
-  ];
+const staticDisclosures = [
+  { id: 1, title: "Academic Planner", file: ["hii"] },
+  { id: 2, title: "College Council", file: ["hii"] },
+  { id: 3, title: "Diagnostic Facility in Hospital", file: ["hii"] },
+  { id: 4, title: "Fee", file: ["hii"] },
+  { id: 5, title: "Admitted Student List", file: ["hii"] },
+  { id: 6, title: "Attendance (Student and Staff)", file: ["hii"] },
+  { id: 7, title: "Research and Publication", file: ["hii"] },
+
+  { id: 8, title: "Teaching Staff", file: "/docs/Teaching 2026 april_merged (1).pdf" },
+
+  { id: 9, title: "Non Teaching", file: "/docs/NON Teaching till june 2026.pdf" },
+
+  { id: 10, title: "Hospital Staff", file: "/docs/Hospital 2026 June.pdf" },
+
+  { id: 11, title: "University Related Detail", file: ["hii"] },
+  { id: 12, title: "CME, FDP, Conference", file: ["hii"] },
+  { id: 13, title: "Award and Achievements", file: ["hii"] },
+  { id: 14, title: "Hospital OPD & IPD Patient Related Details", file: ["hii"] },
+  { id: 15, title: "Student Activity", file: ["hii"] },
+  { id: 16, title: "Student Result", file: ["hii"] },
+  { id: 17, title: "Important Link", file: ["hii"] },
+];
 
   const [disclosures, setDisclosures] = useState(staticDisclosures);
 
@@ -67,6 +81,7 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
   // }, []);
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [disclosureOpen, setDisclosureOpen] = useState(false);
 
 
 
@@ -93,15 +108,15 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
                     </div>
 
                     <div className="right">
-
-                        {/* <a href="#">ADMISSION</a>
-                        <a href="#">PLACEMENTS</a>
-                        <a href="#">GALLERY</a> */}
-                       <NavLink to="">ADMISSION</NavLink>
-                       <NavLink to="">PLACEMENTS</NavLink>
-                       <NavLink to="">GALLERY</NavLink>
-                       <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-
+                      <a href="">GROUP</a>                    
+                      <a href="">ENGINEERING</a>                    
+                      <a href="">MANAGEMENT</a>                    
+                      <a href="">NURSING</a>                    
+                      <a href="">AYURVEDA</a>                    
+                      <a href="">PHARMACY</a>                    
+                      <a href="">EDUCATION</a>                    
+                      <a href="">GIRLS COLLEGE</a>                    
+                      <a href="">CO-ED COLLEGE</a>                    
 
                     </div>
 
@@ -130,7 +145,10 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
     {/* Hamburger Button */}
     <div
       className="menu-btn"
-      onClick={() => setMenuOpen(!menuOpen)}
+      onClick={() => {
+        setMenuOpen(!menuOpen);
+        setDisclosureOpen(false);
+      }}
     >
       {menuOpen ? <FaTimes /> : <FaBars />}
     </div>
@@ -141,6 +159,7 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
       distance={400}
       duration={2}
       ease="power4.out"
+      className="nav-animate-wrap"
     >
       <nav className={`navbar ${menuOpen ? "active" : ""}`}>
         <ul>
@@ -152,15 +171,26 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
           <li><NavLink to="/facilities" onClick={() => setMenuOpen(false)}>Facilities</NavLink></li>
           <li><NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
          {disclosures.length > -1 && (
-         <li className="dropdown">
-  <span className="dropdown-title">
+         <li className={`dropdown ${disclosureOpen ? "open" : ""}`}>
+  <span
+    className="dropdown-title"
+    onClick={() => setDisclosureOpen(!disclosureOpen)}
+  >
     Mandatory Disclosure ▼
   </span>
 
   <ul className="dropdown-menu">
   {disclosures.map((doc) => (
     <li key={doc.id}>
-      <a href={doc.file} target="_blank" rel="noopener noreferrer">
+      <a
+        href={doc.file}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => {
+          setDisclosureOpen(false);
+          setMenuOpen(false);
+        }}
+      >
         {doc.title}
       </a>
     </li>

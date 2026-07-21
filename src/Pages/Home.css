@@ -233,17 +233,20 @@ body{
 }
 
 .hero-big-circle{
-    width:500px;
-    height:500px;
+    width:400px;
+    height:400px;
+    max-width:90vw;
+    margin:0 auto;
     position:relative;
-    right:250px;
 }
 
 .hero-img{
-    width:390px;
-    position:relative;
+    width:310px;
+    max-width:70vw;
+    position:absolute;
     top:35px;
-    left:450px;
+    left:50%;
+    transform:translateX(-50%);
 }
 
 }
@@ -314,21 +317,24 @@ body{
 }
 
 .hero-big-circle{
-    width:430px;
-    height:450px;
+    width:380px;
+    height:400px;
+    max-width:88vw;
+    margin:0 auto;
 }
 
 .hero-circle img{
-    position:relative;
+    position:absolute;
     top:0;
-    overflow: hidden;
-    left:280px;
+    left:0;
 }
 
 .hero-img{
-    width:330px;
+    width:290px;
+    max-width:65vw;
     top:35px;
-    
+    left:50%;
+    transform:translateX(-50%);
 }
 
 }
@@ -357,16 +363,18 @@ body{
 }
 
 .hero-big-circle{
-    width:350px;
-    height:350px;
-    right:280px;
-    
+    width:300px;
+    height:300px;
+    max-width:85vw;
+    margin:0 auto;
 }
 
 .hero-img{
-    width:250px;
-    position:relative;
-    left:410px;
+    width:210px;
+    max-width:60vw;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
 }
 
 .hero-stats{
