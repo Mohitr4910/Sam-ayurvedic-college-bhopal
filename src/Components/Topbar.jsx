@@ -5,6 +5,8 @@ import {
     FaPhoneAlt,
     FaEnvelope,
     FaSearch,
+    FaChevronDown,
+    FaFilePdf,
 } from "react-icons/fa";
 
 import Announcrment from './Announcrment'
@@ -41,30 +43,92 @@ const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
 );
 
   // STATIC (temporary) list of Mandatory Disclosure documents.
-  // Add each new PDF here: put the file in `public/docs/` and add
-  // a row below with a title + the path to that file.
+  // Each entry is a HEADING. Put every PDF that belongs under that
+  // heading inside its `files` array as { title, path } — add as
+  // many as you need. Put the actual PDF in `public/docs/` and
+  // reference it by that path. Leave `files: []` for a heading
+  // that doesn't have a PDF uploaded yet (it will show "Coming soon").
 const staticDisclosures = [
-  { id: 1, title: "Academic Planner", file: ["hii"] },
-  { id: 2, title: "College Council", file: ["hii"] },
-  { id: 3, title: "Diagnostic Facility in Hospital", file: ["hii"] },
-  { id: 4, title: "Fee", file: ["hii"] },
-  { id: 5, title: "Admitted Student List", file: ["hii"] },
-  { id: 6, title: "Attendance (Student and Staff)", file: ["hii"] },
-  { id: 7, title: "Research and Publication", file: ["hii"] },
+  { id: 1, title: "Academic Planner", files: [
+    { title: "Academic Planner", path: "/docs/academic-planner.pdf" },
+  ] },
+  { id: 2, title: "College Council", files: [
+    { title: "College Council", path: "/docs/2.college-council.pdf" },
+    { title: "College Council", path: "/docs/2.college-council-pdf-724x1024.jpg" },
+     
+  ] },
+  { id: 3, title: "Diagnostic Facility in Hospital", files: [
+    { title: "Facility", path: "/docs/3.Diagnostic-Facility-in-Hospital-pdf.jpg" },
 
-  { id: 8, title: "Teaching Staff", file: "/docs/Teaching 2026 april_merged (1).pdf" },
+  ] },
+  { id: 4, title: "Fee", files: [
+    { title: "fees_.pd", path: "/docs/4.fees_.pdf" },
 
-  { id: 9, title: "Non Teaching", file: "/docs/NON Teaching till june 2026.pdf" },
+  ] },
+  { id: 5, title: "Admitted Student List", files: [
+    { title: "fees_.pd", path: "/docs/5.-list-of-admitted-students.pdf" },
 
-  { id: 10, title: "Hospital Staff", file: "/docs/Hospital 2026 June.pdf" },
+  ] },
+  { id: 6, title: "Attendance (Student and Staff)", files: [
+    { title: "Staff Attendance ", path: "/docs/TEACHING-Staff-Attendance.pdf" },
+    { title: "Student Attendance batch-2024-25 ", path: "/docs/student-attendance-batch-2024-25.pdf" },
+    { title: "Student Attendance batch-2022-23", path: "/docs/student-attendance-batch-2022-23.pdf" },
+    { title: "Student Attendance Batch-2021-22  ", path: "/docs/student-attendance-batch-2021-22.pdf" },
 
-  { id: 11, title: "University Related Detail", file: ["hii"] },
-  { id: 12, title: "CME, FDP, Conference", file: ["hii"] },
-  { id: 13, title: "Award and Achievements", file: ["hii"] },
-  { id: 14, title: "Hospital OPD & IPD Patient Related Details", file: ["hii"] },
-  { id: 15, title: "Student Activity", file: ["hii"] },
-  { id: 16, title: "Student Result", file: ["hii"] },
-  { id: 17, title: "Important Link", file: ["hii"] },
+  ] },
+  { id: 7, title: "Research and Publication", files: [] },
+
+  {
+    id: 8,
+    title: "Teaching Staff",
+    files: [
+      { title: "Teaching Staff List", path: "/docs/Teaching 2026 april_merged (1).pdf" },
+      { title: "Details-of-Teaching-Staff", path: "/docs/8.Details-of-Teaching-Staff.pdf" },
+    ],
+  },
+
+  {
+    id: 9,
+    title: "Non Teaching",
+    files: [
+      { title: "Non Teaching Staff List", path: "/docs/NON Teaching till june 2026.pdf" },
+      { title: "Details-of-Non-Teaching-staff", path: "/docs/9.Details-of-Non-Teaching-staff.pdf" },
+    ],
+  },
+
+  {
+    id: 10,
+    title: "Hospital Staff",
+    files: [
+      { title: "Hospital Staff List", path: "/docs/Hospital 2026 June.pdf" },
+    ],
+  },
+
+  { id: 11, title: "University Related Detail", files: [
+      { title: "University Related Detail", path: "/docs/11-University-details.pdf" },
+
+  ] },
+  { id: 12, title: "CME, FDP, Conference", files: [
+      { title: "12-CME-FDP-Conference-pdf", path: "/docs/12-CME-FDP-Conference-pdf-724x1024.jpg" },
+
+  ] },
+  { id: 13, title: "Award and Achievements", files: [
+      { title: "13-Award-Achievements.pdf", path: "/docs/13-Award-Achievements.pdf" },
+
+  ] },
+  { id: 14, title: "Hospital OPD & IPD Patient Related Details", files: [
+      { title: "14-Hospital-OPD-IPD-Details.pdf", path: "/docs/14-Hospital-OPD-IPD-Details.pdf" },
+
+  ] },
+  { id: 15, title: "Student Activity", files: [
+      { title: "14-Hospital-OPD-IPD-Details.pdf", path: "/docs/15-Student-Activity.pdf" },
+
+  ] },
+  { id: 16, title: "Student Result", files: [
+      { title: "16-Student-Results.pdf", path: "/16-Student-Results.pdf" },
+
+  ] },
+  { id: 17, title: "Important Link", files: [] },
 ];
 
   const [disclosures, setDisclosures] = useState(staticDisclosures);
@@ -82,6 +146,8 @@ const staticDisclosures = [
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [disclosureOpen, setDisclosureOpen] = useState(false);
+    // Which Mandatory Disclosure heading is currently expanded (click, not hover)
+    const [openDisclosureId, setOpenDisclosureId] = useState(null);
 
 
 
@@ -180,21 +246,54 @@ const staticDisclosures = [
   </span>
 
   <ul className="dropdown-menu">
-  {disclosures.map((doc) => (
-    <li key={doc.id}>
-      <a
-        href={doc.file}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => {
-          setDisclosureOpen(false);
-          setMenuOpen(false);
-        }}
+  {disclosures.map((doc) => {
+    const isOpen = openDisclosureId === doc.id;
+    const files = Array.isArray(doc.files) ? doc.files : [];
+    return (
+      <li
+        key={doc.id}
+        className={`disclosure-item ${isOpen ? "open" : ""}`}
       >
-        {doc.title}
-      </a>
-    </li>
-  ))}
+        <button
+          type="button"
+          className="disclosure-heading"
+          aria-expanded={isOpen}
+          onClick={() =>
+            setOpenDisclosureId(isOpen ? null : doc.id)
+          }
+        >
+          <span>{doc.title}</span>
+          <FaChevronDown className="disclosure-arrow" />
+        </button>
+
+        {isOpen && (
+          <ul className="disclosure-files">
+            {files.length > 0 ? (
+              files.map((f, idx) => (
+                <li key={idx}>
+                  <a
+                    href={f.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      setDisclosureOpen(false);
+                      setMenuOpen(false);
+                      setOpenDisclosureId(null);
+                    }}
+                  >
+                    <FaFilePdf className="disclosure-file-icon" />
+                    <span>{f.title}</span>
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li className="disclosure-empty">Coming soon</li>
+            )}
+          </ul>
+        )}
+      </li>
+    );
+  })}
 </ul>
 </li>
          )}

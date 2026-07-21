@@ -626,6 +626,163 @@ body {
   color: white;
 }
 
+/* ==========================
+   MANDATORY DISCLOSURE
+   (heading = category, click to
+   expand the PDFs filed under it)
+========================== */
+
+.dropdown-menu {
+  width: 340px;
+  text-align: left;
+}
+
+.disclosure-item {
+  border-bottom: 1px solid #eef0f5;
+}
+
+.disclosure-item:last-child {
+  border-bottom: none;
+}
+
+.disclosure-heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 18px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0b1f4d;
+  letter-spacing: .2px;
+  transition: background .2s ease, color .2s ease;
+}
+
+.disclosure-heading:hover {
+  background: #f4f6fb;
+  color: #063a91;
+}
+
+.disclosure-arrow {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #8a93a8;
+  transition: transform .2s ease;
+}
+
+.disclosure-item.open .disclosure-heading {
+  background: #eef2fb;
+  color: #063a91;
+}
+
+.disclosure-item.open .disclosure-arrow {
+  transform: rotate(180deg);
+  color: #063a91;
+}
+
+/* PDF list revealed on click, sits below its own heading, left aligned.
+   NOTE: `.navbar ul` elsewhere sets display:flex/gap on every <ul>
+   inside the navbar, including this nested one — so we must force
+   block/column layout back here, with !important to win that fight. */
+.disclosure-files {
+  display: block !important;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 8px;
+  gap: 0 !important;
+  background: #f9fafc;
+  border-top: 1px dashed #dde2ee;
+}
+
+.disclosure-files li {
+  display: block !important;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.disclosure-files li a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px 9px 28px;
+  text-align: left;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #24345c !important;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  box-sizing: border-box;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.disclosure-files li a:hover {
+  background: #eef2fb;
+  border-left-color: #063a91;
+  color: #063a91 !important;
+  padding-left: 28px;
+}
+
+.disclosure-file-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: #9d1f32;
+}
+
+.disclosure-empty {
+  padding: 9px 18px 9px 28px;
+  font-size: 13px;
+  font-style: italic;
+  color: #9aa2b5 !important;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .disclosure-item {
+    border-bottom: 1px solid #e6e9f2;
+  }
+
+  .disclosure-heading {
+    color: #041e7d;
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .disclosure-item.open .disclosure-heading {
+    background: #eef2fb;
+  }
+
+  .disclosure-files {
+    padding: 6px 0 10px;
+  }
+
+  .disclosure-files li a {
+    padding: 11px 16px 11px 30px;
+    font-size: 14px;
+  }
+
+  .disclosure-files li a:hover {
+    padding-left: 30px;
+  }
+
+  .disclosure-empty {
+    padding: 11px 16px 11px 30px;
+  }
+}
+
 @media (max-width: 480px) {
 
   .mandatory-disclosure,
