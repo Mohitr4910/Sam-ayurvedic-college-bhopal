@@ -52,6 +52,7 @@ body {
 }
 
 .right {
+  padding-left: 5px;
   gap: 25px;
 }
 
@@ -66,8 +67,8 @@ body {
 .right a {
   text-decoration: none;
   color: white;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   transition: 0.3s;
 }
 
@@ -148,6 +149,8 @@ body {
   white-space: nowrap;
 }
 
+
+
 .navbar ul li a:hover {
   color: #ffd54f;
 }
@@ -164,7 +167,7 @@ body {
   bottom: -8px;
   width: 100%;
   height: 2px;
-  background: #0b7d43;
+  /* background: #0b7d43; */
 }
 
 /* ==========================
@@ -242,6 +245,7 @@ body {
     visibility: visible;
     display: none;
     padding: 0;
+
 }
 
 .dropdown.open .dropdown-menu{
@@ -307,22 +311,33 @@ body {
   margin-left:auto;
   z-index:1001;
 }
-
 .navbar{
     position:absolute;
     top:100%;
     left:0;
     width:100%;
-    background:white;
-    border-radius:0;
+    background:#fff;
+    border:1px solid #d9e2f1;
+    border-radius:0 0 16px 16px;
     padding:15px 20px;
-    box-shadow: 0 8px 15px rgba(0,0,0,.15);
-    display:none;
-    box-sizing: border-box;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    box-sizing:border-box;
+
+    /* Animation */
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-15px);
+    transition:all .35s ease;
+
+    display:block; /* display:none mat rakho */
+    pointer-events:none;
 }
 
 .navbar.active{
-    display:block;
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+    pointer-events:auto;
 }
 
 .navbar ul{
@@ -342,6 +357,7 @@ body {
 }
 
 .navbar li a{
+  border-bottom:1px solid aqua;
     display:block;
     padding:12px;
     color:#041e7d;
@@ -358,15 +374,18 @@ body {
 }
 
 .right{
-    flex-direction:column;
-    align-items:flex-start;
-    flex-wrap:nowrap;
-    gap:8px;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    row-gap:6px;
+    column-gap:14px;
     width:100%;
 }
 
 .right a{
-    font-size:13px;
+    font-size:12px;
+
 }
 
 }
@@ -388,11 +407,12 @@ body {
   }
 
   .right{
-    gap:14px;
+    row-gap:5px;
+    column-gap:10px;
   }
 
   .right a{
-    font-size:12px;
+    font-size:11px;
   }
 
   .navbar li{
