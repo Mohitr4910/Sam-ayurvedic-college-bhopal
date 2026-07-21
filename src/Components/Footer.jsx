@@ -101,12 +101,27 @@ function Footer() {
                 </div>
               )}
             </div>
+
+            <div className="footer-column footer-map-column">
+              <h3>Find Us</h3>
+              <div className="footer-map-wrap">
+                <iframe
+                  className="footer-map"
+                  title="SAM Ayurveda Location Map"
+                  src="https://www.google.com/maps?q=Village%20Agariya%20Chopra%2C%20Block%20Sanchi%2C%20District%20Raisen%2C%20Madhya%20Pradesh%20464551&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
           </div>
 
           <div className="footer-bottom">
             © {new Date().getFullYear()} SAM Global University. All Rights Reserved
           </div>
         </div>
+
       </footer>
     </>
   );

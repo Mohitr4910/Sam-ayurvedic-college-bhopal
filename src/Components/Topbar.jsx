@@ -198,15 +198,15 @@ function Topbar() {
           </div>
 
           <div className="right">
-            <a href="">Group</a>
-            <a href="">Engineering</a>
-            <a href="">Management</a>
-            <a href="">Nursing</a>
-            <a href="">Ayurveda</a>
-            <a href="">Pharmacy</a>
-            <a href="">Education</a>
-            <a href="">Girls College</a>
-            <a href="">Co-Ed College</a>
+            <a href="https://www.samglobaluniversity.ac.in/sam-group/">Group</a>
+            <a href="https://www.samglobaluniversity.ac.in/faculty-of-engg-technology/">Engineering</a>
+            <a href="https://www.samglobaluniversity.ac.in/faculty-of-management/">Management</a>
+            <a href="https://samcollegeofnursing.in/">Nursing</a>
+            <a href="https://sassam.org/">Ayurveda</a>
+            <a href="https://www.samglobaluniversity.ac.in/faculty-of-medical-paramedical-science/b-pharma/">Pharmacy</a>
+            <a href="https://www.samglobaluniversity.ac.in/faculty-of-education/">Education</a>
+            <a href="https://samgirlscollege.com/">Girls College</a>
+            <a href="https://samcollege.in/">Co-Ed College</a>
           </div>
 
         </div>
