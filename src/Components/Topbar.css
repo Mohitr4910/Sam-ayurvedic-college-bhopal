@@ -58,8 +58,9 @@ body {
 
 .left span {
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   display: flex;
+  font-weight: 600;
   align-items: center;
   gap: 8px;
 }
