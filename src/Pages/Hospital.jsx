@@ -12,9 +12,9 @@ import hgImg3 from "../assets/sam-global-university-bhopal-366328.webp";
 import hgImg4 from "../assets/sam-global-university-bhopal-366330.webp";
 import hgImg5 from "../assets/sam-global-university-bhopal-366331.webp";
 import hgImg6 from "../assets/sam-global-university-bhopal-366333.webp";
-import hgImg7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.59-1.jpeg";
+// import hgImg7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.59-1.jpeg";
 import hgImg8 from "../assets/one-480x340.jpg";
-import hgImg9 from "../assets/hero.png";
+// import hgImg9 from "../assets/hero.png";
 import hgImg10 from "../assets/Culture-Events-6-768x512.jpg";
 import hgImg11 from "../assets/Events-And-Workshops-3-768x512.jpg";
 import hgImg12 from "../assets/Events-And-Workshops-5-768x512.jpg";
@@ -120,24 +120,18 @@ const GALLERY_ITEMS = [
     cat: "panchakarma",
   },
   {
-    src: hgImg7,
-    alt: "Shalakya Tantra eye and ENT OPD",
-    cap: "Shalakya OPD",
-    cat: "opd",
-  },
-  {
     src: hgImg8,
     alt: "Faculty guiding students at patient bedside",
     cap: "Bedside teaching",
     cat: "students",
     size: "tall",
   },
-  {
-    src: hgImg9,
-    alt: "Nursing station in the IPD block",
-    cap: "Nursing station",
-    cat: "ipd",
-  },
+  // {
+  //   src: hgImg9,
+  //   alt: "Nursing station in the IPD block",
+  //   cap: "Nursing station",
+  //   cat: "ipd",
+  // },
   {
     src: hgImg10,
     alt: "Hospital pharmacy dispensing classical formulations",

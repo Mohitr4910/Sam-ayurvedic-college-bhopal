@@ -23,7 +23,7 @@ import img3 from "../assets/Foundaton-in-Ayurveda-480x340.jpg";
 import img4 from "../assets/Screenshot-2024-06-25-123226-480x340.jpg";
 import img5 from "../assets/WhatsApp-Image-2025-09-16-at-11.16.33_317191f4-480x340.jpg";
 import img6 from "../assets/WhatsApp-Image-2025-09-16-at-11.17.15_4c36d38e-480x340.jpg";
-import img7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.58-2.jpeg";
+// import img7 from "../assets/WhatsApp-Image-2026-01-24-at-12.54.58-2.jpeg";
 
 
 import gallaryimg1 from "../assets/Culture-Events-6-768x512.jpg";
@@ -51,7 +51,6 @@ const FALLBACK_DEPARTMENT_IMAGES = [
   img4,
   img5,
   img6,
-  img7
 ];
 
 const FALLBACK_GALLERY_IMAGES = [
