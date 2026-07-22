@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import "./Topbar.css";
 import logo from "../assets/Samayurveda (2).png";
 import {
@@ -192,7 +193,8 @@ function Topbar() {
 
             <span>
               <FaEnvelope />
-              adm.samcet@gmail.com
+                           <a style={{color:"white", textDecoration:"none"}} href={`mailto:${""}`}>adm.samcet@gmail.com</a>
+
             </span>
 
           </div>
@@ -226,9 +228,9 @@ function Topbar() {
             duration={2}
             ease="power4.out"
           >
-            <div className="logo">
-              <img src={logo} alt="Logo" />
-            </div>
+  <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
+  <img src={logo} alt="Logo" />
+</Link>
           </AnimatedContent>
 
           {/* Hamburger Button */}

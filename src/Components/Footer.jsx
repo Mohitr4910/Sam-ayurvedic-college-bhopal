@@ -38,15 +38,15 @@ function Footer() {
             <div className="footer-column">
               <h3>Important Links</h3>
 
-              <a href="#">AICTE New Delhi</a>
-              <a href="#">RGPV Bhopal</a>
-              <a href="#">RGPV Diploma Bhopal</a>
-              <a href="#">BU Bhopal</a>
-              <a href="#">DTE MP Counselling</a>
-              <a href="#">Fee Committee Bhopal</a>
+              <a href="https://www.aicte.gov.in/office/new-delhi">AICTE New Delhi</a>
+              <a href="https://www.rgpv.ac.in/">RGPV Bhopal</a>
+              <a href="https://www.rgpvdiploma.in/">RGPV Diploma Bhopal</a>
+              <a href="https://bubhopal.ac.in/1068/Home">BU Bhopal</a>
+              <a href="https://dte.mponline.gov.in/portal/services/onlinecounselling/counshomepage/home.aspx">DTE MP Counselling</a>
+              <a href="https://www.afrcmp.org/">Fee Committee Bhopal</a>
               <a href="#">Vyapam Bhopal</a>
-              <a href="#">MP Online</a>
-              <a href="#">Anti Ragging Cell</a>
+              <a href="https://mponline.gov.in/portal/">MP Online</a>
+              <a href="https://antiragging.in/">Anti Ragging Cell</a>
             </div>
 
             <div className="footer-column">
@@ -54,10 +54,10 @@ function Footer() {
 
               <a href="/about">About Us</a>
               <a href="/hospital">Hospital</a>
-              <a href="/admission">Admission</a>
-              <a href="/placements">Placements</a>
-              <a href="/gallery">Gallery</a>
-              <a href="/academic">Contact</a>
+              <a href="">Admission</a>
+              <a href="">Placements</a>
+              <a href="">Gallery</a>
+              <a href="/contact">Contact</a>
             </div>
 
             <div className="footer-column">
@@ -78,7 +78,7 @@ function Footer() {
 
               <p>{contact.phone}</p>
               <p>{contact.phone2}</p>
-
+              <br />
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
 
               {(contact.facebook_url || contact.instagram_url || contact.youtube_url) && (
@@ -107,8 +107,8 @@ function Footer() {
               <div className="footer-map-wrap">
                 <iframe
                   className="footer-map"
-                  title="SAM Ayurveda Location Map"
-                  src="https://www.google.com/maps?q=Village%20Agariya%20Chopra%2C%20Block%20Sanchi%2C%20District%20Raisen%2C%20Madhya%20Pradesh%20464551&output=embed"
+                  title="SAM College Of Ayurvedic Sciences And Hospital - Location Map"
+                  src="https://www.google.com/maps?q=23.268633363019397, 77.59276185965084(SAM+College+Of+Ayurvedic+Sciences+And+Hospital)&z=17&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
