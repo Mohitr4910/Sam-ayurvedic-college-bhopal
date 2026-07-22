@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import crcl from "../assets/banner_img_bg.webp";
-import doctor from "../assets/hero-image.webp";
+import doctor from "../assets/WhatsApp Image 2026-07-22 at 2.32.28 PM.jpeg";
 import { fetchSingle, fetchList } from "../lib/cms";
 
-import hero1 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
-import hero2 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";
+import hero7 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
+import hero6 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";
 import hero3 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM.jpeg";
-import hero4 from "../assets/WhatsApp Image 2026-07-16 at 12.54.22 PM.jpeg";
+import hero8 from "../assets/WhatsApp Image 2026-07-16 at 12.54.22 PM.jpeg";
+import hero5 from "../assets/WhatsApp Image 2026-07-22 at 2.37.48 PM (1) (1).webp";
+import hero1 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (1) (1).jpg";
+import hero2 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (2) (1).jpg";
+import hero4 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (3) (1).jpg";
+import hero9 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (4).jpg";
 
 import AnimatedContent from "../Components/AnimatedContent";
 
@@ -69,10 +73,10 @@ const ATTENDANCE = [
 ];
 
 
-import leader1 from "../assets/Leadership_chairman-300x300.jpg";
-import leader3 from "../assets/Leadership_director.jpg";
-import leader2 from "../assets/Leadership_executive_director.jpg";
-import leader4 from "../assets/photo-Dr.A.K-Singh.jpeg.jpg";
+import leader1 from "../assets/DlGv9Vva_400x400.webp";
+import leader2 from "../assets/Untitled-design-1.webp";
+import leader3 from "../assets/file_0000000047b481fbb3cda9b679786358 (1) (1).webp";
+import leader4 from "../assets/WhatsApp-Image-2025-06-02-at-15.21.27.webp";
 
 const FALLBACK_LEADERS = [
   {
@@ -204,7 +208,7 @@ function Home() {
           speed={800}
           className="heroSwiper"
         >
-          {[hero1, hero2, hero3, hero4].map((src, index) => (
+          {[hero1, hero2, hero3, hero4,hero5,hero6,hero7,hero8,hero9,].map((src, index) => (
             <SwiperSlide key={index}>
               <img src={src} alt={`Hero ${index + 1}`} />
             </SwiperSlide>
@@ -250,12 +254,8 @@ function Home() {
           {/* Right Side */}
           <div className="hero-right">
             <div className="hero-big-circle">
-              <div className="hero-circle">
-                <img src={crcl} alt="Ayurveda Background" />
-              </div>
-
               <img
-                src={home.hero_image || doctor}
+                src={doctor|| doctor}
                 alt="SAM Ayurveda"
                 className="hero-img"
               />
