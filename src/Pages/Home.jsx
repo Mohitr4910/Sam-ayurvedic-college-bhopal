@@ -11,7 +11,8 @@ import hero8 from "../assets/WhatsApp Image 2026-07-16 at 12.54.22 PM.jpeg";
 import hero4 from "../assets/WhatsApp Image 2026-07-22 at 2.37.48 PM (1) (1).webp";
 import hero2 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (2) (1).jpg";
 import hero5 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM.jpeg";
-import hero1 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (3) (1).jpg";
+import hero9 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (3) (1).jpg";
+import hero1 from "../assets/YBY03770.JPG (1) (1).jpg";
 
 import AnimatedContent from "../Components/AnimatedContent";
 
