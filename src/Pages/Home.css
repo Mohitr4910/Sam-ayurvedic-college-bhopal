@@ -560,7 +560,7 @@ img,svg,video{
 .vmg-title{
     text-align: center;
     margin-bottom: 100px;
-    background: #86d9e0;
+    background:#363d64;
     
 }
 
@@ -572,7 +572,7 @@ img,svg,video{
     padding: 8px 25px;
     font-size: clamp(22px, 2.4vw, 34px);
     font-weight: 700;
-    color: #2f317f;
+    color:white;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 8px;
@@ -801,8 +801,8 @@ img,svg,video{
 }
 
 .section-title h2{
-    background:#86d9e0;
-    color:#2f317f;
+    background:#363d64;
+    color:white;
     font-size:34px;
     padding: 7px;
     /* font-family:Georgia,serif; */
@@ -1042,7 +1042,7 @@ img,svg,video{
 .leadership-heading{
     text-align:center;
     margin-bottom:100px;
-    background:#86d9e0;
+    background:#363d64;
 }
 
 .leadership-heading span{
@@ -1051,7 +1051,7 @@ img,svg,video{
         font-size:34px;
 
     font-weight:700;
-    color:#2f317f;
+    color:white;
     text-transform:uppercase;
     letter-spacing:1px;
     border-radius:8px;
@@ -1355,10 +1355,10 @@ img,svg,video{
     padding: 7px;
     font-size:28px;
     font-family:Georgia, "Times New Roman", serif;
-    color:#111;
+    color:white;
     margin-bottom:18px;
     padding-left: 20px;
-    background:#86d9e0;
+   background:#363d64;
 
 }
 
@@ -1524,8 +1524,8 @@ img,svg,video{
 
 .gallery-title h2{
     padding: 7px;
-    color:#2f317f;
-    background:#86d9e0;
+    color:white;
+    background:#363d64;
     font-size:34px;
 }
 
@@ -1761,20 +1761,21 @@ img,svg,video{
 }
 
 .video-title{
+    padding: 10px;
     text-align:center;
     margin-bottom:100px;
-    background:#86d9e0;
 }
 
 .video-title h2{
+    width: 100%;
+    background:#363d64;
     display:inline-block;
     padding:8px 25px;
     font-size:clamp(22px, 2.4vw, 34px);
     font-weight:700;
-    color:#2f317f;
+    color:white;
     text-transform:uppercase;
     letter-spacing:1px;
-    border-radius:8px;
 }
 
 .video-title span{
@@ -2010,18 +2011,19 @@ img,svg,video{
 .programmes-title {
     text-align: center;
     margin-bottom: 100px;
-    background: #86d9e0;
+    
 }
 
 .programmes-title h2 {
+    width: 100%;
+    background:#363d64;
     display: inline-block;
     padding: 8px 25px;
     font-size: clamp(22px, 2.4vw, 34px);
     font-weight: 700;
-    color: #2f317f;
+    color:white;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-radius: 8px;
 }
 
 .programmes-title p {

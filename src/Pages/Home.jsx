@@ -6,13 +6,12 @@ import { fetchSingle, fetchList } from "../lib/cms";
 
 import hero7 from "../assets/WhatsApp Image 2026-07-16 at 12.44.13 PM.jpeg";
 import hero6 from "../assets/WhatsApp Image 2026-07-16 at 12.47.42 PM.jpeg";
-import hero3 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM.jpeg";
+import hero3 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (1) (1).jpg";
 import hero8 from "../assets/WhatsApp Image 2026-07-16 at 12.54.22 PM.jpeg";
-import hero5 from "../assets/WhatsApp Image 2026-07-22 at 2.37.48 PM (1) (1).webp";
-import hero1 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (1) (1).jpg";
+import hero4 from "../assets/WhatsApp Image 2026-07-22 at 2.37.48 PM (1) (1).webp";
 import hero2 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (2) (1).jpg";
-import hero4 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (3) (1).jpg";
-import hero9 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (4).jpg";
+import hero5 from "../assets/WhatsApp Image 2026-07-16 at 12.49.35 PM.jpeg";
+import hero1 from "../assets/WhatsApp Image 2026-07-22 at 2.37.49 PM (3) (1).jpg";
 
 import AnimatedContent from "../Components/AnimatedContent";
 
@@ -207,7 +206,7 @@ function Home() {
           speed={800}
           className="heroSwiper"
         >
-          {[hero1, hero2, hero3, hero4,hero5,hero6,hero7,hero8,hero9,].map((src, index) => (
+          {[hero1, hero2, hero3, hero4,hero5,hero6,hero7,hero8,].map((src, index) => (
             <SwiperSlide key={index}>
               <img src={src} alt={`Hero ${index + 1}`} />
             </SwiperSlide>
