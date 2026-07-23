@@ -105,14 +105,22 @@ function Footer() {
             <div className="footer-column footer-map-column">
               <h3>Find Us</h3>
               <div className="footer-map-wrap">
+                <div className="footer-map-label">SAM College Of Ayurvedic Sciences And Hospital</div>
                 <iframe
                   className="footer-map"
                   title="SAM College Of Ayurvedic Sciences And Hospital - Location Map"
-                  src="https://www.google.com/maps?q=23.268633363019397, 77.59276185965084(SAM+College+Of+Ayurvedic+Sciences+And+Hospital)&z=17&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28765.65289354645!2d77.57879375904182!3d23.274084352110805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c3fc1a5940f49%3A0x5ccf5fb1fa2bf8e2!2sSAM%20College%20Of%20Ayurvedic%20Sciences%20And%20Hospital!5e1!3m2!1sen!2sin!4v1784802437135!5m2!1sen!2sin"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 ></iframe>
+                <a
+                  className="footer-map-link"
+                  href="https://www.google.com/maps/place/SAM+College+Of+Ayurvedic+Sciences+And+Hospital/@23.274084352110805,77.57879375904182,15z/data=!4m5!3m4!1s0x397c3fc1a5940f49:0x5ccf5fb1fa2bf8e2!8m2!3d23.274084352110805!4d77.57879375904182"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open SAM College Of Ayurvedic Sciences And Hospital location in Google Maps"
+                ></a>
               </div>
             </div>
           </div>
