@@ -44,6 +44,10 @@ import "swiper/css/pagination";
 
 import doctorImg from "../assets/bg.jpg";
 
+const FALLBACK_HERO_SLIDES = [hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8].map(
+  (src, i) => ({ src, alt: `Hero ${i + 1}` })
+);
+
 const FALLBACK_DEPARTMENT_IMAGES = [
   img1,
   img2,
@@ -132,6 +136,7 @@ const FALLBACK_VMG = {
 function Home() {
   const [home, setHome] = useState(FALLBACK_HOME);
   const [vmg, setVmg] = useState(FALLBACK_VMG);
+  const [heroSlides, setHeroSlides] = useState(FALLBACK_HERO_SLIDES);
   const [departmentImages, setDepartmentImages] = useState(
     FALLBACK_DEPARTMENT_IMAGES.map((src, i) => ({ src, alt: `Department ${i + 1}` }))
   );
@@ -150,6 +155,12 @@ function Home() {
     fetchSingle("about").then((data) => {
       if (isMounted && data && (data.vision_text || data.mission_text || data.goal_text)) {
         setVmg({ ...FALLBACK_VMG, ...data });
+      }
+    });
+
+    fetchList("hero_slide").then((rows) => {
+      if (isMounted && rows.length > 0) {
+        setHeroSlides(rows.map((r) => ({ src: r.image, alt: r.alt || "Hero" })));
       }
     });
 
@@ -207,9 +218,9 @@ function Home() {
           speed={800}
           className="heroSwiper"
         >
-          {[hero1, hero2, hero3, hero4,hero5,hero6,hero7,hero8,].map((src, index) => (
+          {heroSlides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <img src={src} alt={`Hero ${index + 1}`} />
+              <img src={slide.src} alt={slide.alt || `Hero ${index + 1}`} />
             </SwiperSlide>
           ))}
         </Swiper>

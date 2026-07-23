@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import "./Topbar.css";
 import logo from "../assets/Samayurveda (2).png";
+import { fetchSingle } from "../lib/cms";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -156,23 +157,69 @@ function Topbar() {
     { id: 17, title: "Important Link", files: [] },
   ];
 
+  // staticDisclosures above is shown until the CMS responds, and kept
+  // as a safety net if the CMS is unreachable or has no headings yet.
   const [disclosures, setDisclosures] = useState(staticDisclosures);
 
-  // --- CMS API version (commented out for now, switch back later) ---
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API_BASE}/api/index.php?type=mandatory_disclosure`)
-  //     .then((res) => setDisclosures(Array.isArray(res.data) ? res.data : []))
-  //     .catch((err) => {
-  //       console.error("Failed to load Mandatory Disclosure list:", err);
-  //       setDisclosures([]);
-  //     });
-  // }, []);
+  useEffect(() => {
+    let isMounted = true;
+    axios
+      .get(`${API_BASE}/api/index.php`, { params: { type: "mandatory_disclosure" } })
+      .then((res) => {
+        if (isMounted && Array.isArray(res.data) && res.data.length > 0) {
+          setDisclosures(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("[CMS] Failed to load Mandatory Disclosure list:", err);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   // Which Mandatory Disclosure heading is currently expanded (click, not hover)
   const [openDisclosureId, setOpenDisclosureId] = useState(null);
+
+  // Site-wide logo/name - admin-editable via "Site Settings" in the CMS.
+  // Falls back to the bundled static logo until the CMS responds (or if
+  // the CMS is unreachable / no logo has been uploaded yet).
+  const [siteSettings, setSiteSettings] = useState({
+    site_name: "SAM College Of Ayurvedic Sciences And Hospital",
+    logo: "",
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchSingle("site").then((data) => {
+      if (isMounted && data) {
+        setSiteSettings((prev) => ({ ...prev, ...data }));
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Apply site name (tab title) and favicon dynamically, since these
+  // come from the admin panel and there's no static index.html field
+  // for them in this project.
+  useEffect(() => {
+    if (siteSettings.site_name) {
+      document.title = siteSettings.site_name;
+    }
+    if (siteSettings.favicon) {
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = siteSettings.favicon;
+    }
+  }, [siteSettings.site_name, siteSettings.favicon]);
 
 
 
@@ -229,7 +276,7 @@ function Topbar() {
             ease="power4.out"
           >
   <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-  <img src={logo} alt="Logo" />
+  <img src={siteSettings.logo || logo} alt={siteSettings.site_name || "Logo"} />
 </Link>
           </AnimatedContent>
 
